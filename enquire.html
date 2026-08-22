@@ -18,6 +18,8 @@
 <meta name="twitter:image" content="https://www.scillasdotter.com/media/web/edgy-wind.webp">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#0A0A0B">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; media-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; form-action https://formsubmit.co; frame-ancestors 'none'; base-uri 'self'; upgrade-insecure-requests">
 <link rel="canonical" href="https://www.scillasdotter.com/enquire.html">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ClothingStore","@id":"https://www.scillasdotter.com/#atelier","name":"Scillasdotter","alternateName":"Alexandra Scillasdotter","description":"Haute couture atelier for made to measure evening wear, bridal and tailoring. Every garment is cut for one person and made once.","url":"https://www.scillasdotter.com/","email":"couture@scillasdotter.com","telephone":"+4676426582","priceRange":"$$$$","areaServed":[{"@type":"City","name":"Amsterdam"},{"@type":"Country","name":"Netherlands"},{"@type":"Country","name":"Belgium"},{"@type":"Country","name":"Sweden"}],"address":{"@type":"PostalAddress","addressLocality":"Amsterdam","addressCountry":"NL"},"founder":{"@id":"https://www.scillasdotter.com/#alexandra"},"makesOffer":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Haute couture, made to measure"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Bridal, made to measure"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Tailoring for women and men"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Collections and touring wardrobe"}}],"availableLanguage":["en","nl","sv"]},{"@type":"Person","@id":"https://www.scillasdotter.com/#alexandra","name":"Alexandra Scillasdotter","jobTitle":"Couturier","url":"https://www.scillasdotter.com/about.html","worksFor":{"@id":"https://www.scillasdotter.com/#atelier"},"knowsAbout":["haute couture","made to measure","bridal","pattern cutting","tailoring","toile","draping"]}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,6 +37,7 @@
       <a href="bridal.html">Bridal</a>
       <a href="collections.html">Collections</a>
       <a href="about.html">About</a>
+      <a href="atelier.html">Atelier</a>
       <a href="process.html">The Process</a>
       <a href="enquire.html" aria-current="page">Enquire</a>
   </nav>
@@ -47,6 +50,7 @@
   <a href="bridal.html">Bridal</a>
   <a href="collections.html">Collections</a>
   <a href="about.html">About</a>
+  <a href="atelier.html">Atelier</a>
   <a href="process.html">The Process</a>
   <a href="enquire.html">Enquire</a>
 </div>
@@ -77,8 +81,7 @@
   </section>
 
   <section class="omhulsel" style="padding-bottom:var(--breuk)">
-    <p class="form-uitleg">Fields marked <b>*</b> are the ones I need to be able to answer you.</p>
-    <form class="formulier" method="POST"
+    <form class="formulier stappen-form" method="POST"
           action="https://formsubmit.co/couture@scillasdotter.com" novalidate>
       <input type="hidden" name="_subject" value="Enquiry via scillasdotter.com">
       <input type="hidden" name="_template" value="table">
@@ -86,59 +89,79 @@
       <input type="hidden" name="_next" value="https://www.scillasdotter.com/thanks.html">
       <input type="text" name="_honey" tabindex="-1" autocomplete="off"
              style="position:absolute;left:-9999px" aria-hidden="true">
-      <div class="veld half">
-        <label class="veldlabel" for="naam">Name<span class="nodig">*</span></label>
-        <input id="naam" name="name" type="text" autocomplete="name" required>
+
+      <div class="stap-balk" aria-hidden="true">
+        <span class="bol aan"></span><span class="bol"></span><span class="bol"></span>
+        <span class="stap-tel">1 of 3</span>
       </div>
 
-      <div class="veld half">
-        <label class="veldlabel" for="whatsapp">Whatsapp Number<span class="nodig">*</span></label>
-        <p class="hulp" id="hulp-wa">Including country code. This is where I usually reply.</p>
-        <input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel"
-               aria-describedby="hulp-wa" required>
-      </div>
+      <!-- 1 -->
+      <fieldset class="stap-blad open" data-stap="1">
+        <legend class="stap-vraag">Who am I writing back to?</legend>
+        <div class="veld">
+          <label class="veldlabel" for="naam">Name<span class="nodig">*</span></label>
+          <input id="naam" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="veld">
+          <label class="veldlabel" for="whatsapp">Whatsapp Number<span class="nodig">*</span></label>
+          <p class="hulp" id="hulp-wa">Including country code. This is where I usually reply.</p>
+          <input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel"
+                 aria-describedby="hulp-wa" required>
+        </div>
+        <div class="veld">
+          <label class="veldlabel" for="email">Email</label>
+          <p class="hulp" id="hulp-mail">Optional, if you would rather not use WhatsApp.</p>
+          <input id="email" name="email" type="email" autocomplete="email" aria-describedby="hulp-mail">
+        </div>
+        <button type="button" class="cta-zwaar verder">Next</button>
+      </fieldset>
 
-      <div class="veld">
-        <label class="veldlabel" for="email">Email</label>
-        <p class="hulp" id="hulp-mail">Optional, if you would rather not use WhatsApp.</p>
-        <input id="email" name="email" type="email" autocomplete="email" aria-describedby="hulp-mail">
-      </div>
-
-      <div class="veld">
-        <label class="veldlabel" for="onderwerp">What is this about?<span class="nodig">*</span></label>
-        <select id="onderwerp" name="subject" required>
-          <option value="Couture">Couture</option>
-          <option value="Bridal">Bridal</option>
-          <option value="Collections">A collection or a tour</option>
-          <option value="Tailoring">Tailoring</option>
-          <option value="Press">Press</option>
-          <option value="Something else">Something else</option>
-        </select>
-      </div>
-
-      <div class="veld" id="datum-veld" hidden>
-        <label class="veldlabel" for="datum">Wedding date (if known)</label>
-        <p class="hulp" id="hulp-datum">Or roughly when. A season is fine.</p>
-        <input id="datum" name="wedding_date" type="text" aria-describedby="hulp-datum">
-      </div>
-
-      <fieldset class="veld" style="border:0;padding:0;margin:0">
-        <legend class="veldlabel" style="padding:0">How would you like me to reply?</legend>
-        <div class="keuzerij">
-          <label><input type="radio" name="reply" value="WhatsApp" checked> WhatsApp</label>
-          <label><input type="radio" name="reply" value="Phone call"> Phone call</label>
-          <label><input type="radio" name="reply" value="Email"> Email</label>
+      <!-- 2 -->
+      <fieldset class="stap-blad" data-stap="2">
+        <legend class="stap-vraag">What is this about?</legend>
+        <div class="veld">
+          <label class="veldlabel" for="onderwerp">Choose one<span class="nodig">*</span></label>
+          <select id="onderwerp" name="subject" required>
+            <option value="Couture">Couture</option>
+            <option value="Bridal">Bridal</option>
+            <option value="Collections">A collection or a tour</option>
+            <option value="Tailoring">Tailoring</option>
+            <option value="Press">Press</option>
+            <option value="Something else">Something else</option>
+          </select>
+        </div>
+        <div class="veld" id="datum-veld" hidden>
+          <label class="veldlabel" for="datum">Wedding date (if known)</label>
+          <p class="hulp" id="hulp-datum">Or roughly when. A season is fine.</p>
+          <input id="datum" name="wedding_date" type="text" aria-describedby="hulp-datum">
+        </div>
+        <div class="veld">
+          <span class="veldlabel">How would you like me to reply?</span>
+          <div class="keuzerij">
+            <label><input type="radio" name="reply" value="WhatsApp" checked> WhatsApp</label>
+            <label><input type="radio" name="reply" value="Phone call"> Phone call</label>
+            <label><input type="radio" name="reply" value="Email"> Email</label>
+          </div>
+        </div>
+        <div class="stap-knoppen">
+          <button type="button" class="cta-midden terug">Back</button>
+          <button type="button" class="cta-zwaar verder">Next</button>
         </div>
       </fieldset>
 
-      <div class="veld">
-        <label class="veldlabel" for="bericht">Your message<span class="nodig">*</span></label>
-        <p class="hulp" id="hulp-bericht">Tell me about the piece you are imagining, and when you
-          need it. A few lines is plenty.</p>
-        <textarea id="bericht" name="message" aria-describedby="hulp-bericht" required></textarea>
-      </div>
-
-      <button class="verzend" type="submit">Send</button>
+      <!-- 3 -->
+      <fieldset class="stap-blad" data-stap="3">
+        <legend class="stap-vraag">Tell me what you are imagining.</legend>
+        <div class="veld">
+          <label class="veldlabel" for="bericht">Your message<span class="nodig">*</span></label>
+          <p class="hulp" id="hulp-bericht">And when you need it. A few lines is plenty.</p>
+          <textarea id="bericht" name="message" aria-describedby="hulp-bericht" required></textarea>
+        </div>
+        <div class="stap-knoppen">
+          <button type="button" class="cta-midden terug">Back</button>
+          <button class="verzend" type="submit">Send</button>
+        </div>
+      </fieldset>
     </form>
 
     <div class="kolom" style="margin-top:var(--sectie)">
@@ -158,7 +181,7 @@
       Couture by Alexandra Scillasdotter.<br>
       Made to measure. Currently Amsterdam, but online meetings welcome.<br>
       Consultations and fittings by appointment only.
-      <nav class="voet-links" aria-label="Footer"><a href="couture.html">Couture</a><a href="bridal.html">Bridal</a><a href="collections.html">Collections</a><a href="about.html">About</a><a href="process.html">The Process</a><a href="enquire.html">Enquire</a></nav>
+      <nav class="voet-links" aria-label="Footer"><a href="couture.html">Couture</a><a href="bridal.html">Bridal</a><a href="collections.html">Collections</a><a href="about.html">About</a><a href="atelier.html">Atelier</a><a href="process.html">The Process</a><a href="enquire.html">Enquire</a></nav>
     </div>
     <div class="voet-contact">
       <div class="rij"><span>Email</span><a href="mailto:couture@scillasdotter.com">couture@scillasdotter.com</a></div>

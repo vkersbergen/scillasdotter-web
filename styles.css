@@ -545,3 +545,127 @@ main > section:last-child{padding-bottom:var(--sectie)}
   font-variant-numeric:tabular-nums}
 .tijdlijn .wat{color:var(--silver);font-size:16px;line-height:1.55}
 .tijdlijn .wat b{color:var(--chalk);font-weight:500}
+
+/* ---------- 25. De About-pagina scherper ----------
+   Het was netjes en daardoor braaf. Drie ingrepen:
+
+   1. De kop mag groot. Op een pagina met precies één portret en vier alinea's
+      is een kleine kop zonde van de ruimte.
+   2. De tijdlijn is een stam met takken: een doorlopende verticale lijn met
+      een merkteken per jaar, in plaats van een rij streepjes. Dat leest als
+      één loopbaan en niet als een cv.
+   3. De takken komen binnen terwijl je scrollt, van links, één voor één. Het
+      is het enige bewegende element op de pagina en het duurt kort. */
+
+.groot{
+  font-size:clamp(30px,5.6vw,58px);line-height:1.02;letter-spacing:-.01em;
+  text-transform:none;color:var(--chalk);text-wrap:balance;margin:0;
+}
+
+/* de stam */
+.tijdlijn.stam{position:relative;margin-top:var(--sectie);padding-left:0}
+.tijdlijn.stam::before{
+  content:"";position:absolute;left:7px;top:6px;bottom:6px;width:1px;
+  background:linear-gradient(to bottom,transparent,var(--edge) 8%,var(--edge) 92%,transparent);
+}
+@media (min-width:768px){ .tijdlijn.stam::before{left:calc(120px + 7px)} }
+
+.tijdlijn.stam li{
+  position:relative;display:grid;grid-template-columns:34px 1fr;gap:0 18px;
+  align-items:start;padding:0 0 var(--stap) 0;border:0;
+}
+@media (min-width:768px){
+  .tijdlijn.stam li{grid-template-columns:120px 34px 1fr}
+}
+.tijdlijn.stam li:last-child{padding-bottom:0}
+
+/* het merkteken op de stam */
+.tijdlijn.stam li::before{
+  content:"";position:absolute;left:3px;top:9px;width:9px;height:9px;
+  background:var(--ink-900);border:1px solid var(--ash);border-radius:50%;
+}
+@media (min-width:768px){ .tijdlijn.stam li::before{left:calc(120px + 3px)} }
+.tijdlijn.stam li:first-child::before{background:var(--chalk);border-color:var(--chalk)}
+
+.tijdlijn.stam .jaar{
+  grid-column:1;font-size:13px;letter-spacing:.16em;font-weight:500;color:var(--ash);
+  font-variant-numeric:tabular-nums;padding-top:2px;
+}
+@media (max-width:767px){
+  .tijdlijn.stam .jaar{grid-column:2;margin-bottom:8px}
+  .tijdlijn.stam li{grid-template-columns:34px 1fr;grid-template-areas:"punt jaar" "punt wat"}
+  .tijdlijn.stam .jaar{grid-area:jaar}
+  .tijdlijn.stam .wat{grid-area:wat}
+}
+.tijdlijn.stam .wat{grid-column:3;max-width:58ch;color:var(--silver);font-size:16px;line-height:1.6}
+@media (max-width:767px){ .tijdlijn.stam .wat{grid-column:2} }
+.tijdlijn.stam .wat b{color:var(--chalk);font-weight:500}
+
+/* de takken komen binnen bij het scrollen */
+.tijdlijn.stam li{opacity:0;transform:translateX(-14px);
+  transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.3,1)}
+.tijdlijn.stam li.zichtbaar{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .tijdlijn.stam li{opacity:1;transform:none;transition:none}
+}
+
+/* ---------- 26. Het formulier in drie stappen ----------
+   Elie Saab, het grootste huis in het onderzoek, doet zijn afspraakaanvraag in
+   vier schermen met een of twee vragen per keer. Reden: een couturier vraagt
+   dingen die je moet bedenken, en een lijst van acht velden ineens leest als
+   werk. Een vraag per keer leest als een gesprek.
+
+   Zonder JavaScript staan alle drie de bladen gewoon open en werkt het als een
+   normaal formulier. De knoppen verschijnen pas als het script draait. */
+.stappen-form{display:block;max-width:660px}
+.stap-blad{border:0;margin:0;padding:0;display:none}
+.stap-blad.open{display:grid;gap:22px}
+.stappen-form:not(.js) .stap-blad{display:grid;gap:22px}
+.stappen-form:not(.js) .stap-knoppen .terug,
+.stappen-form:not(.js) .verder{display:none}
+
+.stap-vraag{
+  padding:0;margin:0 0 4px;font-size:clamp(20px,3vw,26px);line-height:1.25;
+  color:var(--chalk);letter-spacing:-.005em;
+}
+.stap-knoppen{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-top:6px}
+
+/* voortgang: drie bolletjes en een teller */
+.stap-balk{display:flex;align-items:center;gap:10px;margin-bottom:26px}
+.stap-balk .bol{width:7px;height:7px;border-radius:50%;background:var(--edge);
+  transition:background .3s ease,transform .3s ease}
+.stap-balk .bol.aan{background:var(--chalk);transform:scale(1.25)}
+.stap-balk .stap-tel{margin-left:8px;font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--slate);font-variant-numeric:tabular-nums}
+
+/* ---------- 27. De voet: glas ----------
+   Gevraagd: laat de voet zich afscheiden, met glas en diepte. Uitgevoerd als
+   een matglazen plaat die over de inkt ligt: een lichte laag met vervaging
+   erachter, een oplichtende rand aan de bovenkant zodat je de plaat ziet
+   beginnen, en een zachte schaduw eronder.
+
+   Terughoudend gehouden, want de rest van de site heeft geen enkel vlak met
+   diepte. Dit is de enige plek waar iets 'boven' de pagina ligt, en dat is
+   precies waarom het werkt als afsluiting. */
+.voet{
+  position:relative;
+  margin-top:var(--sectie);
+  background:linear-gradient(180deg,rgba(244,243,240,.055),rgba(244,243,240,.022));
+  backdrop-filter:blur(14px) saturate(120%);
+  -webkit-backdrop-filter:blur(14px) saturate(120%);
+  border-top:1px solid rgba(244,243,240,.14);
+  box-shadow:0 -18px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(244,243,240,.10);
+  color:var(--ash);
+}
+/* de lichtstreep die de plaat aankondigt */
+.voet::before{
+  content:"";position:absolute;left:0;right:0;top:-1px;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(244,243,240,.42) 22%,rgba(244,243,240,.42) 78%,transparent);
+}
+.voet .woordmerk{color:var(--chalk)}
+.voet a{color:var(--chalk);border-bottom-color:rgba(244,243,240,.22)}
+.voet a:hover{border-bottom-color:var(--chalk)}
+.voet-contact .rij span{color:var(--slate)}
+@supports not (backdrop-filter: blur(4px)){
+  .voet{background:#141417}
+}
