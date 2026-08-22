@@ -787,3 +787,38 @@ main > section:last-child{padding-bottom:var(--sectie)}
   color:var(--slate);margin:0 0 34px;line-height:1;
 }
 @media (min-width:768px){ .kop-klein{margin-bottom:44px} }
+
+/* ---------- Aanraken op een telefoon ----------
+   GEMETEN, NIET GESCHAT. Op 375 breed was het woordmerk 23px hoog, de menuknop
+   34, de taalkeuze 34 en een voetlink 23. Een vinger raakt betrouwbaar vanaf
+   44px; alles daaronder wordt missen en opnieuw proberen.
+
+   De kopbalk krijgt hier minder padding terug, zodat hij niet groeit terwijl de
+   knoppen erin juist groter worden. Netto blijft de balk even hoog. */
+@media (max-width:767px), (pointer:coarse) {
+  .kop-balk{padding-block:16px}
+  .kop-balk .woordmerk,
+  .menuknop,
+  .taalkeuze select{min-height:44px;display:inline-flex;align-items:center}
+  .menuknop{min-width:44px;justify-content:flex-end}
+  .taalkeuze select{padding-top:0;padding-bottom:0}
+
+  /* Voetlinks stonden op 23px onder elkaar. Meer lucht per regel. */
+  .voet-links a{display:inline-flex;align-items:center;min-height:44px}
+
+  /* Een link midden in een zin mag niet uit de regel springen. Padding op een
+     inline element vergroot wel het raakvlak en niet de regelhoogte. */
+  .cta-licht{padding-block:11px}
+  .cta-midden{min-height:44px}
+  .kopieer{min-height:40px;font-size:12px}
+  .keuzerij label{display:inline-flex;align-items:center;min-height:44px}
+
+  /* 11px is te klein om te lezen op een telefoon. */
+  .afspraak,.stap-balk .stap-tel{font-size:12px}
+
+  /* De voet was het laatste stuk waar alles nog 19 tot 23px hoog was: het
+     woordmerk, het mailadres, het nummer, en de twee links naar de voorwaarden
+     en de privacyverklaring. Juist daar tikt iemand met een duim. */
+  .voet .woordmerk{display:inline-flex;align-items:center;min-height:44px}
+  .voet-contact .rij a{display:inline-flex;align-items:center;min-height:44px}
+}
