@@ -1,5 +1,11 @@
 /* Klein en zichtbaar: er draait niets wat je niet kunt uitleggen. */
 (function () {
+  /* De browser herstelt bij een terugkeer de scrollpositie. Op een pagina die
+     onderaan een formulier heeft betekende dat: klik op het woordmerk en je
+     staat weer onderin. Wij bepalen zelf waar een pagina begint. */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (!location.hash) window.scrollTo(0, 0);
+
   var stil = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* 1. Menu. Overlay dicht met Escape, en de focus gaat terug naar de knop. */
@@ -109,7 +115,21 @@
     toon(0);
   }
 
-  /* 5. Het trouwdatumveld verschijnt alleen als het gesprek over een bruiloft gaat. */
+  /* 5. Klik je op het woordmerk terwijl je al op de homepage staat, dan gaat
+        de pagina naar boven in plaats van niets te doen. */
+  var merk = document.querySelector('.kop-balk .woordmerk');
+  if (merk) {
+    merk.addEventListener('click', function (e) {
+      var hier = location.pathname.replace(/\/$/, '/index.html');
+      if (hier.endsWith('/index.html') || hier === '/' ) {
+        e.preventDefault();
+        history.replaceState(null, '', location.pathname);
+        window.scrollTo({ top: 0, behavior: stil ? 'auto' : 'smooth' });
+      }
+    });
+  }
+
+  /* 6. Het trouwdatumveld verschijnt alleen als het gesprek over een bruiloft gaat. */
   var onderwerp = document.getElementById('onderwerp');
   var datum = document.getElementById('datum-veld');
   if (onderwerp && datum) {

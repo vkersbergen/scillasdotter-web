@@ -25,20 +25,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=Jost:wght@400;500&display=swap">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32">
+<link rel="icon" href="favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <a class="overslaan" href="#hoofd">Skip to content</a>
 
 <header class="kop-balk vast">
-  <a class="woordmerk" href="index.html">Scillasdotter</a>
+  <a class="woordmerk" href="index.html#top">Scillasdotter</a>
   <nav class="nav" aria-label="Main">
+      <a href="about.html" aria-current="page">About</a>
       <a href="couture.html">Couture</a>
       <a href="bridal.html">Bridal</a>
       <a href="collections.html">Collections</a>
-      <a href="about.html" aria-current="page">About</a>
       <a href="atelier.html">Atelier</a>
-      <a href="process.html">The Process</a>
       <a href="enquire.html">Enquire</a>
   </nav>
   <button class="menuknop" aria-expanded="false" aria-controls="menu">Menu</button>
@@ -46,16 +49,15 @@
 
 <div class="overlay" id="menu" hidden>
   <button class="menuknop sluit" aria-label="Close menu">Close</button>
+  <a href="about.html">About</a>
   <a href="couture.html">Couture</a>
   <a href="bridal.html">Bridal</a>
   <a href="collections.html">Collections</a>
-  <a href="about.html">About</a>
   <a href="atelier.html">Atelier</a>
-  <a href="process.html">The Process</a>
   <a href="enquire.html">Enquire</a>
 </div>
 
-<main id="hoofd">
+<main id="hoofd"><span id="top" tabindex="-1"></span>
   <section class="duo">
     <figure class="duo-beeld">
       <img src="media/web/alexandra-portret.webp" alt="Alexandra Scillasdotter" width="900" height="1800" fetchpriority="high">
@@ -64,16 +66,22 @@
     <div class="duo-tekst">
       <div class="kolom">
         <p class="label" style="margin-bottom:18px">About</p>
-        <h1 class="groot">I built it,<br>gave it away,<br>and came back for it.</h1>
+        <h1 class="groot">I built it,<br>then I went and<br>learned the rest.</h1>
         <p class="lang" style="margin-top:var(--tekst-link)">I opened my own atelier in Stockholm in
-          2009. Couture, made to measure, my name on the door.</p>
-        <p class="lang">In 2014 I handed it to my sister Zamina, who still runs it under her own
-          name. Then I spent ten years inside other people's houses. Massimo Dutti, where I was
-          store manager and tailor specialist. Acne Studios. Moncler.</p>
-        <p class="lang">I learned what a collection really costs, how a floor runs, and why most
-          clothes are made the way they are. Which is to say, for nobody in particular.</p>
-        <p class="lang" style="color:var(--chalk)">I know both sides now. I am in Amsterdam, and I
-          am taking commissions again.</p>
+          2009. Couture, made to measure, my name on the door, and five years of doing every part of
+          it myself.</p>
+        <p class="lang">Then I went to work beside the people who do this at the highest level.
+          Massimo Dutti, where I was store manager and tailor specialist and trained the people on
+          the floor. Acne Studios. Moncler. Ten years of standing shoulder to shoulder with them,
+          and of running a business rather than only making things.</p>
+        <p class="lang">So I know what a collection costs, how a floor runs, and why most clothes
+          are made the way they are. Which is to say, for nobody in particular.</p>
+        <p class="lang">Outside the atelier I compete in bikini fitness. It is the same discipline
+          as this work. You measure, you adjust, you do it again, and you find out what you are
+          actually capable of. I have never been interested in the version of anything that is good
+          enough.</p>
+        <p class="lang" style="color:var(--chalk)">I am in Amsterdam, and I am taking commissions
+          again.</p>
         <p class="ondertekening" style="text-align:left">Alexandra Scillasdotter</p>
       </div>
     </div>
@@ -84,23 +92,23 @@
     <ol class="tijdlijn stam">
         <li class="tak">
           <span class="jaar">2006</span>
-          <span class="wat">Junior buyer at <b>Max Mara</b>, Stockholm. The first years were spent learning what a garment costs before it is beautiful.</span>
+          <span class="wat"><b>Max Mara</b>, Stockholm. Junior buyer. I learned what a garment costs before anyone calls it beautiful.</span>
         </li>
         <li class="tak">
           <span class="jaar">2009</span>
-          <span class="wat">Founded <b>Scillasdotter atelier</b> in Stockholm. Couture, made to measure, my own name on the door at twenty-something.</span>
+          <span class="wat">I opened <b>my own atelier</b>. Couture, made to measure, my name on the door, and five years of doing every part of it myself.</span>
         </li>
         <li class="tak">
           <span class="jaar">2014</span>
-          <span class="wat">Handed the atelier and the clients to my sister <b>Zamina</b>, who runs it under her own name to this day. Then <b>Massimo Dutti</b>, where I was store manager and tailor specialist, and trained the people who sold the clothes.</span>
+          <span class="wat"><b>Massimo Dutti</b>. Store manager, tailor specialist and product trainer. I kept cutting, and I started running things.</span>
         </li>
         <li class="tak">
           <span class="jaar">2019</span>
-          <span class="wat"><b>Acne Studios</b>, and then <b>Moncler</b> as general store manager. Ten years of seeing the industry from the other side of the counter.</span>
+          <span class="wat"><b>Acne Studios</b>, then <b>Moncler</b> as general store manager. Four years beside the people who build the collections, and four years learning what management actually is.</span>
         </li>
         <li class="tak">
           <span class="jaar">2026</span>
-          <span class="wat">Back where I started, in Amsterdam. Same work, better eyes.</span>
+          <span class="wat"><b>Amsterdam</b>. Back to the bench, with everything the last ten years taught me.</span>
         </li>
     </ol>
     <div class="kolom" style="margin-top:var(--sectie)">
@@ -118,7 +126,7 @@
       Couture by Alexandra Scillasdotter.<br>
       Made to measure. Currently Amsterdam, but online meetings welcome.<br>
       Consultations and fittings by appointment only.
-      <nav class="voet-links" aria-label="Footer"><a href="couture.html">Couture</a><a href="bridal.html">Bridal</a><a href="collections.html">Collections</a><a href="about.html">About</a><a href="atelier.html">Atelier</a><a href="process.html">The Process</a><a href="enquire.html">Enquire</a></nav>
+      <nav class="voet-links" aria-label="Footer"><a href="about.html">About</a><a href="couture.html">Couture</a><a href="bridal.html">Bridal</a><a href="collections.html">Collections</a><a href="atelier.html">Atelier</a><a href="enquire.html">Enquire</a></nav>
     </div>
     <div class="voet-contact">
       <div class="rij"><span>Email</span><a href="mailto:couture@scillasdotter.com">couture@scillasdotter.com</a></div>

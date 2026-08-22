@@ -25,20 +25,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=Jost:wght@400;500&display=swap">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32">
+<link rel="icon" href="favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <a class="overslaan" href="#hoofd">Skip to content</a>
 
 <header class="kop-balk vast">
-  <a class="woordmerk" href="index.html">Scillasdotter</a>
+  <a class="woordmerk" href="index.html#top">Scillasdotter</a>
   <nav class="nav" aria-label="Main">
+      <a href="about.html">About</a>
       <a href="couture.html">Couture</a>
       <a href="bridal.html">Bridal</a>
       <a href="collections.html">Collections</a>
-      <a href="about.html">About</a>
       <a href="atelier.html">Atelier</a>
-      <a href="process.html">The Process</a>
       <a href="enquire.html" aria-current="page">Enquire</a>
   </nav>
   <button class="menuknop" aria-expanded="false" aria-controls="menu">Menu</button>
@@ -46,16 +49,15 @@
 
 <div class="overlay" id="menu" hidden>
   <button class="menuknop sluit" aria-label="Close menu">Close</button>
+  <a href="about.html">About</a>
   <a href="couture.html">Couture</a>
   <a href="bridal.html">Bridal</a>
   <a href="collections.html">Collections</a>
-  <a href="about.html">About</a>
   <a href="atelier.html">Atelier</a>
-  <a href="process.html">The Process</a>
   <a href="enquire.html">Enquire</a>
 </div>
 
-<main id="hoofd">
+<main id="hoofd"><span id="top" tabindex="-1"></span>
   <section class="hero op-beeld" style="--hoog:58vh">
     <picture>
       <source media="(max-width: 767px)" srcset="media/web/edgy-jas.webp">
@@ -181,7 +183,7 @@
       Couture by Alexandra Scillasdotter.<br>
       Made to measure. Currently Amsterdam, but online meetings welcome.<br>
       Consultations and fittings by appointment only.
-      <nav class="voet-links" aria-label="Footer"><a href="couture.html">Couture</a><a href="bridal.html">Bridal</a><a href="collections.html">Collections</a><a href="about.html">About</a><a href="atelier.html">Atelier</a><a href="process.html">The Process</a><a href="enquire.html">Enquire</a></nav>
+      <nav class="voet-links" aria-label="Footer"><a href="about.html">About</a><a href="couture.html">Couture</a><a href="bridal.html">Bridal</a><a href="collections.html">Collections</a><a href="atelier.html">Atelier</a><a href="enquire.html">Enquire</a></nav>
     </div>
     <div class="voet-contact">
       <div class="rij"><span>Email</span><a href="mailto:couture@scillasdotter.com">couture@scillasdotter.com</a></div>
