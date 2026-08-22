@@ -121,11 +121,15 @@
   if (merk) {
     merk.addEventListener('click', function (e) {
       var hier = location.pathname.replace(/\/$/, '/index.html');
-      if (hier.endsWith('/index.html') || hier === '/' ) {
-        e.preventDefault();
-        history.replaceState(null, '', location.pathname);
-        window.scrollTo({ top: 0, behavior: stil ? 'auto' : 'smooth' });
-      }
+      if (!hier.endsWith('/index.html')) return;   // andere pagina: gewoon navigeren
+      e.preventDefault();
+      /* Sta je al op de homepage met #write in de balk, dan moet die er eerst
+         af. Anders zet de browser je terug bij het formulier. */
+      history.replaceState(null, '', location.pathname);
+      window.scrollTo({ top: 0, behavior: stil ? 'auto' : 'smooth' });
+      /* Zacht scrollen wordt niet overal uitgevoerd. Staat hij daarna nog
+         steeds onderin, dan gaat hij er alsnog hard naartoe. */
+      setTimeout(function () { if (window.scrollY > 4) window.scrollTo(0, 0); }, 700);
     });
   }
 
