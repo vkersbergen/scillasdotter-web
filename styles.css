@@ -401,3 +401,147 @@ ol.stappen{list-style:none}
 }
 .verzend::after{content:"→";font-size:15px;letter-spacing:0}
 .verzend:hover{gap:18px;background:#fff}
+
+/* ---------- 20. De vragen ----------
+   Staat er voor twee lezers tegelijk: iemand die twijfelt, en de antwoord-
+   machine die een citaat zoekt. Daarom letterlijke vragen als kop en een
+   antwoord dat op zichzelf klopt, los van de rest van de pagina. */
+.vragen{display:grid;gap:var(--stap);margin-top:var(--kop-tekst)}
+@media (min-width:1180px){ .vragen{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--goot)} }
+.vraag-blok{max-width:620px;border-top:1px solid var(--edge-soft);padding-top:20px}
+.vraag-blok h3{margin:0 0 10px;font-size:16px;line-height:1.4;letter-spacing:.02em;
+  font-weight:500;color:var(--chalk);text-transform:none}
+.vraag-blok p{margin:0;color:var(--silver)}
+
+/* ---------- 21. Het formulier, duidelijker ----------
+   Het was een rij velden op een donkere grond, en je zag nauwelijks waar een
+   veld begon. Dit is de pagina waar het geld binnenkomt, dus die mag zichzelf
+   wel aanwijzen.
+
+   Wat er anders is:
+   · elk veld staat in een eigen vlak met een lijn eromheen, in plaats van
+     alleen een streep eronder. Je ziet nu wát je aanraakt.
+   · 56px hoog, ruim boven wat een duim nodig heeft.
+   · een lichte linkerrand die oplicht zodra je in het veld staat, zodat je op
+     een lang formulier ziet waar je bent.
+   · verplichte velden dragen een teken en een uitleg bovenaan, in plaats van
+     dat je het pas merkt bij het verzenden.
+   · naam en telefoon staan naast elkaar op een breed scherm; de rest niet,
+     want die hebben de volle breedte nodig. */
+.formulier{gap:22px;max-width:660px}
+@media (min-width:768px){
+  .formulier{display:grid;grid-template-columns:1fr 1fr;column-gap:18px}
+  .formulier > .veld:nth-child(-n+2){grid-column:auto}
+  .formulier > .veld,.formulier > fieldset,.formulier > .verzend,.formulier > .form-uitleg{grid-column:1 / -1}
+  .formulier > .veld.half{grid-column:auto}
+}
+.form-uitleg{margin:0 0 4px;font-size:13px;color:var(--slate);letter-spacing:0}
+.form-uitleg b{color:var(--ash);font-weight:500}
+.veld{gap:6px}
+.veld input,.veld select,.veld textarea{
+  background:var(--ink-700);
+  border:1px solid var(--edge-soft);
+  border-left:2px solid var(--edge-soft);
+  min-height:56px;padding:14px 16px;
+  transition:border-color .18s ease,background .18s ease;
+}
+.veld textarea{min-height:150px}
+.veld input:hover,.veld select:hover,.veld textarea:hover{border-color:var(--edge)}
+.veld input:focus,.veld select:focus,.veld textarea:focus{
+  background:var(--ink-600);border-color:var(--edge);border-left-color:var(--chalk);
+}
+.veld input::placeholder,.veld textarea::placeholder{color:#5E5C58}
+.veldlabel .nodig{color:var(--slate);margin-left:6px;letter-spacing:0;font-weight:400}
+.veld select{
+  background-image:linear-gradient(45deg,transparent 50%,var(--ash) 50%),
+                   linear-gradient(135deg,var(--ash) 50%,transparent 50%);
+  background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;
+  background-size:6px 6px,6px 6px;background-repeat:no-repeat;padding-right:44px;
+}
+.keuzerij label{min-height:48px;padding:0 18px;border-color:var(--edge-soft);transition:border-color .18s ease,color .18s ease}
+.keuzerij label:hover{border-color:var(--edge);color:var(--chalk)}
+.keuzerij input:checked + *,.keuzerij label:has(input:checked){border-color:var(--chalk);color:var(--chalk)}
+
+/* ---------- 22. Uitlijning rechtgezet ----------
+   Op de telefoon liep de onderkant uit elkaar: een gat van bijna twee
+   schermhoogtes boven de voet, de 'by appointment'-regel die over twee regels
+   brak met te veel letterspatiëring, en een rij voetlinks waarvan 'Enquire'
+   als enige op een tweede regel viel.
+
+   Drie oorzaken, alle drie opgeteld: de sectie had al zijn eigen padding,
+   .afspraak zette daar 72px bovenop, en de voet nog eens 96px marge. */
+
+/* 1. De afspraakregel: minder ruimte erboven, en op de telefoon minder
+      letterspatiëring zodat hij niet ongelukkig breekt. */
+.afspraak{margin-top:32px;padding-top:20px;letter-spacing:.12em;line-height:1.7}
+@media (max-width:767px){
+  .afspraak{font-size:11px;letter-spacing:.10em;margin-top:28px}
+}
+
+/* 2. De voet sluit aan op de sectie erboven in plaats van er ver vanaf te staan. */
+.voet{margin-top:0;border-top:1px solid var(--edge-soft);padding-top:56px}
+main > section:last-child{padding-bottom:var(--sectie)}
+
+/* 3. De voetlinks: op de telefoon twee nette kolommen in plaats van een rij
+      die willekeurig afbreekt. Op een breed scherm blijft het één rij. */
+.voet-links{display:grid;grid-template-columns:1fr 1fr;gap:14px 20px;margin:22px 0 0;padding:0}
+@media (min-width:768px){ .voet-links{display:flex;flex-wrap:wrap;gap:22px} }
+.voet-links a{border-bottom:1px solid var(--edge-soft);padding-bottom:3px;letter-spacing:.08em}
+
+/* 4. Het contactblok links uitlijnen met de rest in plaats van rechts, want
+      op één kolom hoort alles op dezelfde marge te beginnen. */
+.voet-binnen{gap:36px}
+.voet-contact{display:grid;gap:6px}
+.voet-contact .rij{display:grid;grid-template-columns:76px 1fr;gap:10px;align-items:baseline}
+.voet-contact .rij span{color:var(--slate)}
+@media (min-width:768px){ .voet-binnen{align-items:start} .voet-contact{justify-items:start} }
+
+/* ---------- 23. Keuzerondjes ----------
+   GEVONDEN OP DE TELEFOON. De regel voor invoervelden (56px hoog, eigen vlak,
+   linkerrand) gold ook voor radio's en vinkjes, want dat zijn ook <input>.
+   Daardoor werd elke keuzeknop een blok van 56 bij 56 met een tweede blok
+   erin. Nu zijn ze uitgezonderd en zien ze er weer uit als keuzeknoppen. */
+.veld input[type="radio"],.veld input[type="checkbox"],
+.keuzerij input[type="radio"],.keuzerij input[type="checkbox"]{
+  width:16px;height:16px;min-height:0;padding:0;margin:0;border:0;background:none;
+  appearance:auto;-webkit-appearance:auto;accent-color:var(--chalk);flex:0 0 auto;
+}
+.keuzerij label{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 18px}
+
+/* ---------- 24. De About-pagina: half beeld, half tekst ----------
+   Eén scherm, in tweeën gedeeld. Links haar eigen portret over de volle
+   hoogte, rechts het verhaal. Op de telefoon staat het beeld boven de tekst,
+   want naast elkaar wordt dan twee keer te smal.
+
+   Dit is de enige pagina met een echte foto van haar. Daarom mag hij groot,
+   en daarom staat er verder niets omheen. */
+.duo{display:grid;grid-template-columns:1fr;gap:0;align-items:stretch;
+     border-top:1px solid var(--edge-soft)}
+@media (min-width:900px){ .duo{grid-template-columns:minmax(0,42%) minmax(0,58%)} }
+.duo-beeld{position:relative;overflow:hidden;background:var(--ink-800);height:64vh}
+/* Op een breed scherm blijft de foto staan terwijl de tekst eronderdoor
+   scrollt. Dat lost meteen het snijprobleem op: het vlak is nu precies één
+   schermhoogte in plaats van zo hoog als het verhaal, dus er wordt niet
+   halverwege haar hoofd afgesneden. */
+@media (min-width:900px){
+  .duo{align-items:start}
+  .duo-beeld{position:sticky;top:0;height:100vh}
+}
+.duo-beeld img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:50% 28%;filter:grayscale(1) contrast(1.04)}
+.duo-beeld figcaption{position:absolute;left:20px;bottom:16px;z-index:2;
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--on-image-soft);
+  text-shadow:0 1px 18px rgba(0,0,0,.8)}
+.duo-tekst{padding:var(--sectie) var(--marge)}
+@media (min-width:900px){ .duo-tekst{padding:var(--sectie) clamp(40px,5vw,72px)} }
+.duo-tekst .kolom{max-width:56ch}
+
+/* De tijdlijn naast het verhaal: jaartal en één regel, meer niet. */
+.tijdlijn{list-style:none;margin:var(--sectie) 0 0;padding:0;display:grid;gap:0}
+.tijdlijn li{display:grid;grid-template-columns:96px 1fr;gap:18px;align-items:baseline;
+  padding:16px 0;border-top:1px solid var(--edge-soft)}
+.tijdlijn li:last-child{border-bottom:1px solid var(--edge-soft)}
+.tijdlijn .jaar{font-size:12px;letter-spacing:.14em;font-weight:500;color:var(--slate);
+  font-variant-numeric:tabular-nums}
+.tijdlijn .wat{color:var(--silver);font-size:16px;line-height:1.55}
+.tijdlijn .wat b{color:var(--chalk);font-weight:500}

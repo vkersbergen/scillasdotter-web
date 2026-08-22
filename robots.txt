@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# De antwoordmachines mogen lezen; daar komt straks verkeer vandaan.
+User-agent: GPTBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://www.scillasdotter.com/sitemap.xml

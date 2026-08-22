@@ -9,7 +9,17 @@
 <meta property="og:description" content="Write to Alexandra Scillasdotter. Every enquiry is answered personally within 48 hours. The first conversation is free, and nothing is decided in it.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.scillasdotter.com/enquire.html">
+<meta property="og:image" content="https://www.scillasdotter.com/media/web/edgy-wind.webp">
+<meta property="og:site_name" content="SCILLASDOTTER">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Enquire · SCILLASDOTTER">
+<meta name="twitter:description" content="Write to Alexandra Scillasdotter. Every enquiry is answered personally within 48 hours. The first conversation is free, and nothing is decided in it.">
+<meta name="twitter:image" content="https://www.scillasdotter.com/media/web/edgy-wind.webp">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#0A0A0B">
 <link rel="canonical" href="https://www.scillasdotter.com/enquire.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ClothingStore","@id":"https://www.scillasdotter.com/#atelier","name":"Scillasdotter","alternateName":"Alexandra Scillasdotter","description":"Haute couture atelier for made to measure evening wear, bridal and tailoring. Every garment is cut for one person and made once.","url":"https://www.scillasdotter.com/","email":"couture@scillasdotter.com","telephone":"+4676426582","priceRange":"$$$$","areaServed":[{"@type":"City","name":"Amsterdam"},{"@type":"Country","name":"Netherlands"},{"@type":"Country","name":"Belgium"},{"@type":"Country","name":"Sweden"}],"address":{"@type":"PostalAddress","addressLocality":"Amsterdam","addressCountry":"NL"},"founder":{"@id":"https://www.scillasdotter.com/#alexandra"},"makesOffer":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Haute couture, made to measure"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Bridal, made to measure"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Tailoring for women and men"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Collections and touring wardrobe"}}],"availableLanguage":["en","nl","sv"]},{"@type":"Person","@id":"https://www.scillasdotter.com/#alexandra","name":"Alexandra Scillasdotter","jobTitle":"Couturier","url":"https://www.scillasdotter.com/about.html","worksFor":{"@id":"https://www.scillasdotter.com/#atelier"},"knowsAbout":["haute couture","made to measure","bridal","pattern cutting","tailoring","toile","draping"]}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=Jost:wght@400;500&display=swap">
@@ -24,7 +34,7 @@
       <a href="couture.html">Couture</a>
       <a href="bridal.html">Bridal</a>
       <a href="collections.html">Collections</a>
-      <a href="atelier.html">Atelier</a>
+      <a href="about.html">About</a>
       <a href="process.html">The Process</a>
       <a href="enquire.html" aria-current="page">Enquire</a>
   </nav>
@@ -36,7 +46,7 @@
   <a href="couture.html">Couture</a>
   <a href="bridal.html">Bridal</a>
   <a href="collections.html">Collections</a>
-  <a href="atelier.html">Atelier</a>
+  <a href="about.html">About</a>
   <a href="process.html">The Process</a>
   <a href="enquire.html">Enquire</a>
 </div>
@@ -67,6 +77,7 @@
   </section>
 
   <section class="omhulsel" style="padding-bottom:var(--breuk)">
+    <p class="form-uitleg">Fields marked <b>*</b> are the ones I need to be able to answer you.</p>
     <form class="formulier" method="POST"
           action="https://formsubmit.co/couture@scillasdotter.com" novalidate>
       <input type="hidden" name="_subject" value="Enquiry via scillasdotter.com">
@@ -75,13 +86,13 @@
       <input type="hidden" name="_next" value="https://www.scillasdotter.com/thanks.html">
       <input type="text" name="_honey" tabindex="-1" autocomplete="off"
              style="position:absolute;left:-9999px" aria-hidden="true">
-      <div class="veld">
-        <label class="veldlabel" for="naam">Name</label>
+      <div class="veld half">
+        <label class="veldlabel" for="naam">Name<span class="nodig">*</span></label>
         <input id="naam" name="name" type="text" autocomplete="name" required>
       </div>
 
-      <div class="veld">
-        <label class="veldlabel" for="whatsapp">Whatsapp Number</label>
+      <div class="veld half">
+        <label class="veldlabel" for="whatsapp">Whatsapp Number<span class="nodig">*</span></label>
         <p class="hulp" id="hulp-wa">Including country code. This is where I usually reply.</p>
         <input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel"
                aria-describedby="hulp-wa" required>
@@ -94,7 +105,7 @@
       </div>
 
       <div class="veld">
-        <label class="veldlabel" for="onderwerp">What is this about?</label>
+        <label class="veldlabel" for="onderwerp">What is this about?<span class="nodig">*</span></label>
         <select id="onderwerp" name="subject" required>
           <option value="Couture">Couture</option>
           <option value="Bridal">Bridal</option>
@@ -121,7 +132,7 @@
       </fieldset>
 
       <div class="veld">
-        <label class="veldlabel" for="bericht">Your message</label>
+        <label class="veldlabel" for="bericht">Your message<span class="nodig">*</span></label>
         <p class="hulp" id="hulp-bericht">Tell me about the piece you are imagining, and when you
           need it. A few lines is plenty.</p>
         <textarea id="bericht" name="message" aria-describedby="hulp-bericht" required></textarea>
@@ -147,12 +158,12 @@
       Couture by Alexandra Scillasdotter.<br>
       Made to measure. Currently Amsterdam, but online meetings welcome.<br>
       Consultations and fittings by appointment only.
-      <p style="margin-top:20px;display:flex;flex-wrap:wrap;gap:18px"><a href="couture.html">Couture</a>  <a href="bridal.html">Bridal</a>  <a href="collections.html">Collections</a>  <a href="atelier.html">Atelier</a>  <a href="process.html">The Process</a>  <a href="enquire.html">Enquire</a></p>
+      <nav class="voet-links" aria-label="Footer"><a href="couture.html">Couture</a><a href="bridal.html">Bridal</a><a href="collections.html">Collections</a><a href="about.html">About</a><a href="process.html">The Process</a><a href="enquire.html">Enquire</a></nav>
     </div>
-    <div>
-      Email &nbsp; <a href="mailto:couture@scillasdotter.com">couture@scillasdotter.com</a><br>
-      WhatsApp &nbsp; <a href="https://wa.me/4676426582">+4676426582</a>
-      <p style="margin-top:20px">© 2026 Scillasdotter</p>
+    <div class="voet-contact">
+      <div class="rij"><span>Email</span><a href="mailto:couture@scillasdotter.com">couture@scillasdotter.com</a></div>
+      <div class="rij"><span>WhatsApp</span><a href="https://wa.me/4676426582">+4676426582</a></div>
+      <div class="rij" style="margin-top:14px"><span></span><span>© 2026 Scillasdotter</span></div>
     </div>
   </div>
 </footer>
