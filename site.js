@@ -178,4 +178,47 @@
     try { document.execCommand('copy'); klaar(); } catch (e) { /* dan niet */ }
     v.remove();
   }
+  /* 8. Taal. Het menu wisselt tussen / en /sv/ op dezelfde pagina.
+
+        Waarom de browsertaal en niet het land: het land bepalen vraagt een
+        dienst van derden die het IP-adres van elke bezoeker te zien krijgt, en
+        de privacypagina belooft juist dat dat niet gebeurt. De taalinstelling
+        van de browser staat er al en kost niemand iets.
+
+        Kiest iemand zelf, dan onthouden we dat en gaan we hem daarna nooit meer
+        verplaatsen. */
+  var kiezer = document.getElementById('taal');
+  /* Welke taal deze pagina is staat in de pagina zelf. Dat is betrouwbaarder
+     dan het pad aflezen, want in een voorbeeldomgeving staat de site in een
+     submap en klopt /sv/ aan het begin niet meer. */
+  var opSv = document.documentElement.lang === 'sv';
+
+  function naarTaal(t) {
+    var p = location.pathname;
+    var m = p.match(/^(.*?)(?:\/sv)?\/([^\/]*)$/);
+    if (!m) return;
+    var basis = m[1] || '';
+    var bestand = (m[2] === 'index.html') ? '' : m[2];
+    var doel = basis + (t === 'sv' ? '/sv/' : '/') + bestand;
+    if (doel !== p) location.replace(doel + location.hash);
+  }
+
+  if (kiezer) {
+    /* Welke taal aan staat komt uit de pagina zelf, niet uit de HTML van het
+       menu. Anders moet de vertaling ook nog het woordje selected verzetten. */
+    kiezer.value = opSv ? 'sv' : 'en';
+    kiezer.addEventListener('change', function () {
+      try { localStorage.setItem('taal', kiezer.value); } catch (e) {}
+      naarTaal(kiezer.value);
+    });
+  }
+
+  try {
+    var gekozen = localStorage.getItem('taal');
+    if (gekozen) {
+      if ((gekozen === 'sv') !== opSv) naarTaal(gekozen);
+    } else if (!opSv && /^sv\b/i.test(navigator.language || '')) {
+      naarTaal('sv');
+    }
+  } catch (e) { /* geen opslag: dan blijft het gewoon Engels */ }
 })();

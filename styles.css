@@ -744,3 +744,38 @@ main > section:last-child{padding-bottom:var(--sectie)}
 @supports not (backdrop-filter: blur(4px)){
   .voet{background:#141417}
 }
+
+/* ---------- Credits op About ----------
+   Geen jaartallen: de naam draagt de regel. Elke naam een eigen blok, met een
+   dunne lijn ertussen zodat ze los van elkaar staan. */
+.credits{list-style:none;margin:0;padding:0;max-width:820px}
+.credits li{
+  display:grid;gap:6px;padding:26px 0;border-top:1px solid var(--edge-soft);
+}
+.credits li:first-child{border-top:0;padding-top:0}
+@media (min-width:768px){
+  .credits li{grid-template-columns:minmax(200px,34%) 1fr;gap:32px;align-items:baseline}
+}
+.credits .wie{
+  font-size:clamp(19px,2.4vw,26px);line-height:1.15;color:var(--chalk);
+  letter-spacing:-.005em;text-wrap:balance;
+}
+.credits .wat{color:var(--silver);line-height:1.55}
+
+/* ---------- Taalkeuze in de kopbalk ---------- */
+.kopeind{display:flex;align-items:center;gap:22px}
+.verborgen{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.taalkeuze select{
+  appearance:none;-webkit-appearance:none;background:none;border:0;cursor:pointer;
+  font-family:inherit;font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:500;color:var(--on-image);padding:8px 16px 8px 0;
+}
+.kop-balk.vast .taalkeuze select{color:var(--ash)}
+.taalkeuze{position:relative;display:inline-flex;align-items:center}
+.taalkeuze::after{
+  content:"";position:absolute;right:2px;top:50%;width:5px;height:5px;
+  border-right:1px solid currentColor;border-bottom:1px solid currentColor;
+  transform:translateY(-70%) rotate(45deg);pointer-events:none;opacity:.7;
+}
+.taalkeuze select:hover{color:var(--chalk)}
+.taalkeuze select option{background:var(--ink-900);color:var(--chalk)}
