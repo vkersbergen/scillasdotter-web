@@ -133,7 +133,10 @@
   var onderwerp = document.getElementById('onderwerp');
   var datum = document.getElementById('datum-veld');
   if (onderwerp && datum) {
-    function toon() { datum.hidden = onderwerp.value !== 'Bridal'; }
-    onderwerp.addEventListener('change', toon); toon();
+    /* Deze heette eerst ook toon(). Twee functiedeclaraties met dezelfde naam in
+       dezelfde functie: de laatste wint, dus riepen Next en Send hierna deze aan
+       in plaats van de stappenfunctie, en gebeurde er zichtbaar niets. */
+    function datumZichtbaar() { datum.hidden = onderwerp.value !== 'Bridal'; }
+    onderwerp.addEventListener('change', datumZichtbaar); datumZichtbaar();
   }
 })();

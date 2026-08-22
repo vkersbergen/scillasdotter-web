@@ -386,6 +386,14 @@ ol.stappen{list-style:none}
   position:relative;display:inline-flex;align-items:center;gap:10px;
   border-bottom:0;padding:10px 0;font-size:13px;letter-spacing:.14em;
 }
+/* Als een cta-midden een <button> is, geeft de browser hem een grijze vulling
+   en zijn eigen letter. Op zwart werd dat een wit blok met witte tekst. */
+button.cta-midden,button.cta-zwaar{
+  appearance:none;-webkit-appearance:none;font-family:inherit;cursor:pointer;
+  text-transform:uppercase;font-weight:500;
+}
+button.cta-midden{background:none;border:0;color:var(--silver)}
+button.cta-midden:hover{color:var(--chalk)}
 .cta-midden::before{
   content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;
   background:currentColor;opacity:.35;transition:opacity .2s ease;
