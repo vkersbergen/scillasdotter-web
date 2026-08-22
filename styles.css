@@ -148,9 +148,16 @@ h1+p,h2+p{margin-top:var(--kop-tekst)}
 /* ---------- 7. Hero (§5, §7) ---------- */
 .hero{position:relative;height:78vh;min-height:460px;overflow:hidden;background:var(--ink-900)}
 @media (min-width:768px){ .hero{height:88vh} }
-.hero > img,.hero > video{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+.hero > img,.hero > video,.hero > picture{
+  position:absolute;inset:0;width:100%;height:100%;
 }
+.hero > img,.hero > video,.hero > picture img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+/* GEVONDEN BIJ HET NAKIJKEN. Zodra er een mobiele uitsnede bij kwam zit het
+   beeld in een <picture>, en dan is de <img> geen direct kind meer van .hero.
+   De regel hierboven greep hem dus niet: position bleef static, het beeld stond
+   op ware grootte (1200x2150) in de flow en de hero leek zwart. */
 .hero video{opacity:0;transition:opacity .8s ease}
 .hero video.klaar{opacity:1}
 /* De scrim: verloop van 78% onderaan naar 0 op 58% hoogte (§7). Nooit een blok. */
