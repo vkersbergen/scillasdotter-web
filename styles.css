@@ -328,10 +328,69 @@ ol.stappen{list-style:none}
 .kop-balk:not(.vast) .woordmerk,
 .kop-balk:not(.vast) .menuknop{ text-shadow:0 1px 18px rgba(0,0,0,.75) }
 
-/* ---------- 18. Alle film in zwart-wit ----------
-   GEVONDEN OP MOBIEL. De stills zijn zwart-wit, de Pixabay-clips niet — de
-   opening sloeg om van monochroom naar warm bruin zodra de film overnam.
-   Eén filter trekt beide bronnen in dezelfde wereld, en het is meteen de
-   reden dat geleend en gegenereerd beeld naast elkaar kunnen staan zonder
-   dat je ziet welk welk is. */
-.hero video{filter:grayscale(1) contrast(1.06) brightness(.94)}
+/* ---------- 18. Van kleur naar zwart-wit, langzaam ----------
+   Eerst sloeg het beeld meteen om naar monochroom. Nu begint de film in
+   volle kleur en zakt hij over twaalf seconden naar zwart-wit — de eerste
+   acht seconden gebeurt er bijna niets, daarna trekt de kleur weg.
+
+   Waarom zo lang: wie binnenkomt ziet kleur, wie blijft kijken ziet het
+   verdwijnen. Dat is één beweging in plaats van een schakelaar, en het is
+   het enige effect op de pagina.
+
+   Het posterbeeld blijft zwart-wit; als de film niet speelt (reduced motion,
+   trage verbinding) klopt de pagina nog steeds. */
+.hero video{
+  filter:grayscale(0) contrast(1.02) saturate(1.06);
+  animation:ontkleuren 12s ease-in 1s forwards;
+}
+@keyframes ontkleuren{
+  0%   {filter:grayscale(0)   contrast(1.02) saturate(1.06)}
+  55%  {filter:grayscale(.18) contrast(1.03) saturate(1.00)}
+  100% {filter:grayscale(1)   contrast(1.06) brightness(.94)}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero video{animation:none;filter:grayscale(1) contrast(1.06) brightness(.94)}
+}
+
+/* ---------- 19. Knoppen: duidelijker en moderner ----------
+   De oude waren een dunne lijn met wijde letterspatiëring. Correct voor het
+   segment, maar je zag pas dat het een knop was als je erop stond.
+
+   Wat er anders is:
+   · de zware knop is nu gevuld in plaats van omlijnd. Eén gevuld vlak per
+     scherm is genoeg om te weten waar je moet klikken.
+   · groter raakoppervlak: 54px hoog, ruim boven de 44px die een duim nodig heeft.
+   · een pijl die bij hover een stukje opschuift, zodat hij reageert.
+   · de middelste sport houdt zijn onderlijn, maar die is nu vol in plaats van
+     grijs, en hij groeit bij hover van links naar rechts. */
+.cta-zwaar{
+  position:relative;display:inline-flex;align-items:center;gap:14px;
+  background:var(--chalk);color:var(--ink-900);border:1px solid var(--chalk);
+  padding:0 34px;height:54px;font-size:13px;font-weight:500;letter-spacing:.14em;
+  transition:background .2s ease,color .2s ease,gap .2s ease;
+}
+.cta-zwaar::after{content:"→";font-size:15px;letter-spacing:0;transition:transform .2s ease}
+.cta-zwaar:hover{background:transparent;color:var(--chalk);gap:18px}
+.cta-zwaar:hover::after{transform:translateX(3px)}
+.op-beeld .cta-zwaar{background:var(--on-image);color:var(--ink-900);border-color:var(--on-image)}
+.op-beeld .cta-zwaar:hover{background:transparent;color:var(--on-image)}
+
+.cta-midden{
+  position:relative;display:inline-flex;align-items:center;gap:10px;
+  border-bottom:0;padding:10px 0;font-size:13px;letter-spacing:.14em;
+}
+.cta-midden::before{
+  content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;
+  background:currentColor;opacity:.35;transition:opacity .2s ease;
+}
+.cta-midden::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;
+  background:currentColor;transition:width .3s cubic-bezier(.2,.7,.3,1)}
+.cta-midden:hover::before{opacity:0}
+.cta-midden:hover::after{width:100%}
+
+.verzend{
+  display:inline-flex;align-items:center;gap:14px;height:54px;padding:0 38px;
+  font-size:13px;letter-spacing:.14em;transition:gap .2s ease,background .2s ease;
+}
+.verzend::after{content:"→";font-size:15px;letter-spacing:0}
+.verzend:hover{gap:18px;background:#fff}
