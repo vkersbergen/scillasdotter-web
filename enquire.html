@@ -51,7 +51,14 @@
   </section>
 
   <section class="omhulsel" style="padding-bottom:var(--breuk)">
-    <form class="formulier" method="post" action="#" novalidate>
+    <form class="formulier" method="POST"
+          action="https://formsubmit.co/couture@scillasdotter.com" novalidate>
+      <input type="hidden" name="_subject" value="Enquiry via scillasdotter.com">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://www.scillasdotter.com/thanks.html">
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off"
+             style="position:absolute;left:-9999px" aria-hidden="true">
       <div class="veld">
         <label class="veldlabel" for="naam">Name</label>
         <input id="naam" name="name" type="text" autocomplete="name" required>
