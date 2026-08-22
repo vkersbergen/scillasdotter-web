@@ -79,11 +79,15 @@
     var teller = form.querySelector('.stap-tel');
     var nu = 0;
 
-    function toon(i) {
+    /* springen=false bij het opzetten van de pagina. Anders trok deze functie
+       elke bezoeker bij het laden meteen naar het formulier onderaan, ook als
+       hij net op het woordmerk had geklikt om juist naar boven te gaan. */
+    function toon(i, springen) {
       bladen.forEach(function (b, n) { b.classList.toggle('open', n === i); });
       bollen.forEach(function (b, n) { b.classList.toggle('aan', n <= i); });
       if (teller) teller.textContent = (i + 1) + ' of ' + bladen.length;
       nu = i;
+      if (springen === false) return;
       var eerste = bladen[i].querySelector('input:not([type=hidden]),select,textarea');
       if (eerste) eerste.focus({ preventScroll: true });
       form.scrollIntoView({ block: 'start', behavior: stil ? 'auto' : 'smooth' });
@@ -112,7 +116,7 @@
       }
     });
 
-    toon(0);
+    toon(0, false);
   }
 
   /* 5. Klik je op het woordmerk terwijl je al op de homepage staat, dan gaat
