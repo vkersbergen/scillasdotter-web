@@ -147,4 +147,35 @@
     function datumZichtbaar() { datum.hidden = onderwerp.value !== 'Bridal'; }
     onderwerp.addEventListener('change', datumZichtbaar); datumZichtbaar();
   }
+  /* 7. Kopieerknop naast het mailadres. Een mailto opent alleen iets als er een
+        mailprogramma is ingesteld; is dat niet zo, dan gebeurt er niets en lijkt
+        de site stuk. Deze knop werkt altijd. */
+  document.querySelectorAll('.kopieer').forEach(function (knop) {
+    knop.addEventListener('click', function () {
+      var tekst = knop.getAttribute('data-kopie');
+      var klaar = function () {
+        var was = knop.textContent;
+        knop.textContent = 'Copied';
+        knop.classList.add('gelukt');
+        setTimeout(function () { knop.textContent = was; knop.classList.remove('gelukt'); }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(tekst).then(klaar, function () { hulpVeld(tekst, klaar); });
+      } else {
+        hulpVeld(tekst, klaar);
+      }
+    });
+  });
+
+  /* Oudere browsers en pagina's zonder clipboard-rechten: via een tijdelijk veld. */
+  function hulpVeld(tekst, klaar) {
+    var v = document.createElement('textarea');
+    v.value = tekst;
+    v.setAttribute('readonly', '');
+    v.style.cssText = 'position:absolute;left:-9999px';
+    document.body.appendChild(v);
+    v.select();
+    try { document.execCommand('copy'); klaar(); } catch (e) { /* dan niet */ }
+    v.remove();
+  }
 })();
