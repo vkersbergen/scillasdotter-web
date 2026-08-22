@@ -199,6 +199,9 @@ h1+p,h2+p{margin-top:var(--kop-tekst)}
 @media (min-width:1180px){ .raster.drie{grid-template-columns:repeat(3,1fr)} }
 .look figure{margin:0}
 .look img{width:100%;aspect-ratio:3/4;object-fit:cover}
+/* Een rij met liggende beelden: een staande uitsnede zou de tafel en het
+   raam er half afsnijden. */
+.raster.breed .look img{aspect-ratio:4/3}
 .look figcaption{margin-top:14px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--ash);line-height:1.5}
 .look figcaption .nr{color:var(--slate);margin-right:8px}
