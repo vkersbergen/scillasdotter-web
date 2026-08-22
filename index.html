@@ -68,7 +68,7 @@
     <div class="hero-tekst">
       <p class="label">By commission</p>
       <p class="hero-naam">Alexandra<br>Scillasdotter</p>
-      <p style="margin-top:32px"><a class="cta-zwaar" href="enquire.html">Request an appointment</a></p>
+      <p style="margin-top:32px"><a class="cta-zwaar" href="#write">Request an appointment</a></p>
     </div>
   </section>
 
@@ -109,12 +109,97 @@
     </div>
   </section>
 
-  <section class="sectie omhulsel">
+  <section class="sectie omhulsel" id="write">
     <div class="kolom">
-      <h2>Start with a conversation</h2>
-      <p>The first conversation is free, and nothing is decided in it. Tell me roughly what you have
-        in mind. A date, an occasion, a photograph you keep coming back to.</p>
-      <p style="margin-top:var(--tekst-link)"><a class="cta-zwaar" href="enquire.html">Write to Alexandra</a></p>
+      <p class="label" style="margin-bottom:16px">Enquire</p>
+      <h2 class="groot" style="font-size:clamp(26px,4vw,42px)">Write to Alexandra</h2>
+      <p style="margin-top:var(--kop-tekst)">Every enquiry comes to me, and I answer it myself,
+        within 48 hours. The first conversation is free, and nothing is decided in it.</p>
+    </div>
+        <form class="formulier stappen-form" method="POST"
+          action="https://formsubmit.co/couture@scillasdotter.com" novalidate>
+      <input type="hidden" name="_subject" value="Enquiry via scillasdotter.com">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://www.scillasdotter.com/thanks.html">
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off"
+             style="position:absolute;left:-9999px" aria-hidden="true">
+
+      <div class="stap-balk" aria-hidden="true">
+        <span class="bol aan"></span><span class="bol"></span><span class="bol"></span>
+        <span class="stap-tel">1 of 3</span>
+      </div>
+
+      <!-- 1 -->
+      <fieldset class="stap-blad open" data-stap="1">
+        <legend class="stap-vraag">Who am I writing back to?</legend>
+        <div class="veld">
+          <label class="veldlabel" for="naam">Name<span class="nodig">*</span></label>
+          <input id="naam" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="veld">
+          <label class="veldlabel" for="whatsapp">Whatsapp Number<span class="nodig">*</span></label>
+          <p class="hulp" id="hulp-wa">Including country code. This is where I usually reply.</p>
+          <input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel"
+                 aria-describedby="hulp-wa" required>
+        </div>
+        <div class="veld">
+          <label class="veldlabel" for="email">Email</label>
+          <p class="hulp" id="hulp-mail">Optional, if you would rather not use WhatsApp.</p>
+          <input id="email" name="email" type="email" autocomplete="email" aria-describedby="hulp-mail">
+        </div>
+        <button type="button" class="cta-zwaar verder">Next</button>
+      </fieldset>
+
+      <!-- 2 -->
+      <fieldset class="stap-blad" data-stap="2">
+        <legend class="stap-vraag">What is this about?</legend>
+        <div class="veld">
+          <label class="veldlabel" for="onderwerp">Choose one<span class="nodig">*</span></label>
+          <select id="onderwerp" name="subject" required>
+            <option value="Couture">Couture</option>
+            <option value="Bridal">Bridal</option>
+            <option value="Collections">A collection or a tour</option>
+            <option value="Tailoring">Tailoring</option>
+            <option value="Press">Press</option>
+            <option value="Something else">Something else</option>
+          </select>
+        </div>
+        <div class="veld" id="datum-veld" hidden>
+          <label class="veldlabel" for="datum">Wedding date (if known)</label>
+          <p class="hulp" id="hulp-datum">Or roughly when. A season is fine.</p>
+          <input id="datum" name="wedding_date" type="text" aria-describedby="hulp-datum">
+        </div>
+        <div class="veld">
+          <span class="veldlabel">How would you like me to reply?</span>
+          <div class="keuzerij">
+            <label><input type="radio" name="reply" value="WhatsApp" checked> WhatsApp</label>
+            <label><input type="radio" name="reply" value="Phone call"> Phone call</label>
+            <label><input type="radio" name="reply" value="Email"> Email</label>
+          </div>
+        </div>
+        <div class="stap-knoppen">
+          <button type="button" class="cta-midden terug">Back</button>
+          <button type="button" class="cta-zwaar verder">Next</button>
+        </div>
+      </fieldset>
+
+      <!-- 3 -->
+      <fieldset class="stap-blad" data-stap="3">
+        <legend class="stap-vraag">Tell me what you are imagining.</legend>
+        <div class="veld">
+          <label class="veldlabel" for="bericht">Your message<span class="nodig">*</span></label>
+          <p class="hulp" id="hulp-bericht">And when you need it. A few lines is plenty.</p>
+          <textarea id="bericht" name="message" aria-describedby="hulp-bericht" required></textarea>
+        </div>
+        <div class="stap-knoppen">
+          <button type="button" class="cta-midden terug">Back</button>
+          <button class="verzend" type="submit">Send</button>
+        </div>
+      </fieldset>
+    </form>
+    <div class="kolom" style="margin-top:var(--sectie)">
+      <p>Or ask me one thing: <a class="cta-licht" href="mailto:couture@scillasdotter.com">couture@scillasdotter.com</a>.</p>
       <p class="afspraak">By appointment only · Currently Amsterdam · Online meetings welcome</p>
     </div>
   </section>
