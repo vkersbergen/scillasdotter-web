@@ -208,6 +208,7 @@ h1+p,h2+p{margin-top:var(--kop-tekst)}
 }
 .hero > img,.hero > video,.hero > picture img{
   width:100%;height:100%;object-fit:cover;display:block;
+  object-position:50% var(--beeldhoogte,50%);
 }
 /* GEVONDEN BIJ HET NAKIJKEN. Zodra er een mobiele uitsnede bij kwam zit het
    beeld in een <picture>, en dan is de <img> geen direct kind meer van .hero.
