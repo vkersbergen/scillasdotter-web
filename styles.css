@@ -1,0 +1,337 @@
+/* =============================================================
+   SCILLASDOTTER — stylesheet
+   Gebouwd naar DESIGN.md. Elke waarde hieronder staat daar; waar
+   ik ben afgeweken staat de reden erbij.
+   ============================================================= */
+
+/* ---------- 1. Tokens (DESIGN.md §3) ---------- */
+:root{
+  /* grond */
+  --ink-900:#0A0A0B;
+  --ink-800:#101013;
+  --ink-700:#16161A;
+  --ink-600:#1E1E22;
+
+  /* tekst en lijn */
+  --chalk:#F4F3F0;
+  --silver:#C9C7C1;
+  --ash:#A3A19A;
+  --slate:#82807A;
+  --edge:#4A4A4F;
+  --edge-soft:#2A2A2E;
+
+  /* tekst over beeld */
+  --on-image:#FFFFFF;
+  --on-image-soft:#E6E5E2;
+
+  /* interactie */
+  --focus:#F4F3F0;
+
+  /* ruimte — alles een veelvoud van 8 (§5) */
+  --marge:20px;
+  --goot:16px;
+  --sectie:72px;
+  --breuk:96px;
+  --kop-tekst:20px;
+  --tekst-link:24px;
+  --stap:40px;
+}
+@media (min-width:768px){
+  :root{ --marge:32px; --goot:20px; --sectie:120px; --breuk:176px;
+         --kop-tekst:24px; --tekst-link:32px; --stap:48px; }
+}
+@media (min-width:1180px){ :root{ --marge:48px; --goot:24px; } }
+@media (min-width:1600px){ :root{ --marge:64px; } }
+
+/* De site kent één wereld. Geen lichte variant: dit is een bewuste
+   keuze uit DESIGN.md §3, geen vergeten media query. Daarom staat
+   alles hieronder expliciet en erft niets van de host. */
+
+/* ---------- 2. Grondslag ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--ink-900);
+  color:var(--silver);
+  font-family:"Jost",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:17px;              /* ondergrens uit §4: nooit lager */
+  font-weight:400;             /* 300 valt weg op inkt */
+  line-height:1.65;
+  letter-spacing:.005em;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img,video{display:block;max-width:100%;height:auto;border:0;border-radius:0;box-shadow:none}
+a{color:inherit}
+
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+
+.overslaan{
+  position:absolute;left:-9999px;top:0;
+  background:var(--chalk);color:var(--ink-900);
+  padding:12px 20px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;z-index:100;
+}
+.overslaan:focus{left:var(--marge);top:12px}
+
+/* ---------- 3. Maatvoering ---------- */
+.omhulsel{max-width:1440px;margin:0 auto;padding-left:var(--marge);padding-right:var(--marge)}
+.kolom{max-width:620px}          /* §4: een tekstregel is nooit breder */
+.sectie{padding-block:var(--sectie)}
+.breuk{padding-top:var(--breuk)}
+
+/* ---------- 4. Typografie (§4) ---------- */
+.hero-regel,h1,h2,.collectietitel,.label,.knop,.stapnummer,.veldlabel{
+  text-transform:uppercase;
+}
+.hero-regel{
+  font-size:26px;line-height:1.15;letter-spacing:.05em;font-weight:400;
+  margin:0;color:var(--on-image);
+  text-shadow:0 1px 24px rgba(0,0,0,.5);   /* tweede vangnet, §7 */
+}
+h1{font-size:24px;line-height:1.20;letter-spacing:.06em;font-weight:400;color:var(--chalk);margin:0}
+h2{font-size:18px;line-height:1.30;letter-spacing:.10em;font-weight:400;color:var(--chalk);margin:0}
+.collectietitel{font-size:16px;line-height:1.35;letter-spacing:.12em;font-weight:400;color:var(--chalk)}
+.lang{font-size:17px;line-height:1.70;letter-spacing:0}
+.label{font-size:12px;line-height:1.40;letter-spacing:.18em;font-weight:500;color:var(--ash)}
+.meta{font-size:12px;letter-spacing:.18em;font-weight:500;color:var(--slate);text-transform:uppercase}
+@media (min-width:768px){
+  .hero-regel{font-size:38px}
+  h1{font-size:32px}
+  h2{font-size:20px}
+  .collectietitel{font-size:17px}
+  .lang{font-size:18px}
+}
+p{margin:0 0 var(--kop-tekst)}
+p:last-child{margin-bottom:0}
+h1+p,h2+p{margin-top:var(--kop-tekst)}
+
+/* ---------- 5. Woordmerk (§4a) ---------- */
+.woordmerk{
+  font-size:14px;letter-spacing:.16em;font-weight:400;text-transform:uppercase;
+  color:var(--chalk);text-decoration:none;white-space:nowrap;
+}
+@media (min-width:768px){ .woordmerk{font-size:15px} }
+
+/* ---------- 6. Navigatie (§8.1) ---------- */
+.kop-balk{
+  position:absolute;top:0;left:0;right:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:24px var(--marge);
+}
+.kop-balk.vast{position:sticky;background:var(--ink-900);border-bottom:1px solid var(--edge-soft)}
+.nav{display:none;gap:28px}
+.nav a{
+  font-size:13px;letter-spacing:.16em;text-transform:uppercase;line-height:1;
+  color:var(--on-image-soft);text-decoration:none;padding-block:6px;
+}
+.kop-balk.vast .nav a{color:var(--ash)}
+.nav a:hover,.nav a[aria-current="page"]{color:var(--chalk)}
+@media (min-width:768px){ .nav{display:flex} .menuknop{display:none} }
+
+.menuknop{
+  background:none;border:0;color:var(--on-image);cursor:pointer;
+  font-family:inherit;font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:500;padding:8px 0;
+}
+.overlay{
+  position:fixed;inset:0;z-index:30;background:rgba(22,22,26,.98);
+  display:none;flex-direction:column;justify-content:center;gap:8px;padding:0 var(--marge);
+}
+.overlay[open],.overlay.open{display:flex}
+.overlay a{
+  font-size:22px;letter-spacing:.12em;text-transform:uppercase;color:var(--chalk);
+  text-decoration:none;padding:14px 0;border-bottom:1px solid var(--edge-soft);
+}
+.overlay .sluit{position:absolute;top:24px;right:var(--marge)}
+
+/* ---------- 7. Hero (§5, §7) ---------- */
+.hero{position:relative;height:78vh;min-height:460px;overflow:hidden;background:var(--ink-900)}
+@media (min-width:768px){ .hero{height:88vh} }
+.hero > img,.hero > video{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+}
+.hero video{opacity:0;transition:opacity .8s ease}
+.hero video.klaar{opacity:1}
+/* De scrim: verloop van 78% onderaan naar 0 op 58% hoogte (§7). Nooit een blok. */
+.hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top,rgba(10,10,11,.78) 0%,rgba(10,10,11,.55) 22%,rgba(10,10,11,0) 58%);
+}
+.hero-tekst{
+  position:absolute;left:var(--marge);bottom:48px;right:var(--marge);z-index:2;
+  max-width:720px;
+}
+@media (min-width:768px){ .hero-tekst{left:48px;bottom:64px} }
+.hero-tekst .label{color:var(--on-image-soft);margin:0 0 16px;text-shadow:0 1px 24px rgba(0,0,0,.5)}
+
+/* ---------- 8. Links en de CTA-ladder (§8.8) ---------- */
+.cta-zwaar{
+  display:inline-block;border:1px solid var(--chalk);
+  padding:15px 30px;font-size:13px;font-weight:500;letter-spacing:.16em;
+  text-transform:uppercase;line-height:1;color:var(--chalk);text-decoration:none;
+  transition:background .25s ease,color .25s ease;
+}
+.cta-zwaar:hover{background:var(--chalk);color:var(--ink-900)}
+.cta-midden{
+  display:inline-block;font-size:13px;font-weight:500;letter-spacing:.16em;
+  text-transform:uppercase;line-height:1;color:var(--chalk);text-decoration:none;
+  border-bottom:1px solid var(--edge);padding-bottom:6px;
+}
+.cta-midden:hover{border-bottom-color:var(--chalk)}
+.cta-licht{
+  display:inline-block;font-size:17px;color:var(--ash);
+  text-decoration:none;border-bottom:1px solid var(--edge-soft);padding-bottom:2px;
+}
+.cta-licht:hover{color:var(--chalk);border-bottom-color:var(--edge)}
+.op-beeld .cta-zwaar,.op-beeld .cta-midden{color:var(--on-image);border-color:var(--on-image)}
+
+/* ---------- 9. Collectieraster (§5, §8.3) ---------- */
+.raster{display:grid;gap:var(--goot);row-gap:calc(var(--goot) * 1.5);grid-template-columns:1fr}
+@media (min-width:768px){ .raster{grid-template-columns:repeat(2,1fr)} }
+@media (min-width:1180px){ .raster.drie{grid-template-columns:repeat(3,1fr)} }
+.look figure{margin:0}
+.look img{width:100%;aspect-ratio:3/4;object-fit:cover}
+.look figcaption{margin-top:14px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ash);line-height:1.5}
+.look figcaption .nr{color:var(--slate);margin-right:8px}
+.look figcaption .toelichting{display:block;margin-top:6px;text-transform:none;letter-spacing:0;
+  font-size:14px;color:var(--slate);line-height:1.55}
+
+/* ---------- 10. Het proces (§8.5) ---------- */
+.stappen{list-style:none;margin:0;padding:0;display:grid;gap:var(--stap)}
+.stap{display:grid;gap:10px;max-width:620px}
+.stapnummer{font-size:12px;letter-spacing:.16em;font-weight:500;color:var(--slate);line-height:1}
+.stap h3{margin:0;font-size:17px;letter-spacing:.10em;text-transform:uppercase;font-weight:400;color:var(--chalk)}
+.stap p{margin:0;color:var(--silver)}
+
+/* ---------- 11. Op afspraak (§8.6) ---------- */
+.afspraak{
+  border-top:1px solid var(--edge-soft);margin-top:var(--sectie);padding-top:24px;
+  font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--slate);
+}
+
+/* ---------- 12. Formulier (§8.7) ---------- */
+.formulier{display:grid;gap:28px;max-width:620px}
+.veld{display:grid;gap:8px}
+.veldlabel{font-size:12px;letter-spacing:.16em;font-weight:500;color:var(--ash);line-height:1}
+/* Hulptekst staat ónder het label, niet als placeholder: een placeholder
+   verdwijnt zodra iemand typt, en dit is juist de tekst die moet blijven staan.
+   Afwijking van COPY.md, vastgelegd in DESIGN.md §8.7. */
+.hulp{font-size:14px;color:var(--slate);line-height:1.5;margin:0}
+.veld input,.veld select,.veld textarea{
+  font-family:inherit;font-size:17px;line-height:1.40;color:var(--chalk);
+  background:var(--ink-700);border:0;border-bottom:1px solid var(--edge);
+  padding:12px 14px;width:100%;border-radius:0;appearance:none;
+}
+.veld textarea{min-height:132px;resize:vertical}
+.veld input:focus,.veld select:focus,.veld textarea:focus{
+  background:var(--ink-600);border-bottom-color:var(--chalk);outline:none;
+}
+.veld input:focus-visible,.veld select:focus-visible,.veld textarea:focus-visible{
+  outline:2px solid var(--focus);outline-offset:2px;
+}
+.keuzerij{display:flex;flex-wrap:wrap;gap:10px}
+.keuzerij label{
+  display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--silver);
+  border:1px solid var(--edge-soft);padding:10px 14px;cursor:pointer;
+}
+.keuzerij input{width:auto;accent-color:var(--chalk)}
+.verzend{
+  justify-self:start;background:var(--chalk);color:var(--ink-900);border:0;
+  font-family:inherit;font-size:13px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  padding:16px 34px;cursor:pointer;
+}
+.verzend:hover{background:#fff}
+.verplicht{color:var(--slate)}
+
+/* ---------- 13. Footer (§8.9) ---------- */
+.voet{
+  border-top:1px solid var(--edge-soft);margin-top:var(--breuk);
+  padding:48px var(--marge) 56px;font-size:12px;letter-spacing:.10em;line-height:1.60;color:var(--slate);
+}
+.voet-binnen{max-width:1440px;margin:0 auto;display:grid;gap:32px}
+@media (min-width:768px){ .voet-binnen{grid-template-columns:1fr auto;align-items:end} }
+.voet a{color:var(--ash);text-decoration:none;border-bottom:1px solid var(--edge-soft)}
+.voet a:hover{color:var(--chalk);border-bottom-color:var(--edge)}
+.voet .woordmerk{display:block;margin-bottom:10px}
+
+/* ---------- 14. Beweging (§6) ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .hero video{display:none}
+}
+/* AFWIJKING VAN DESIGN.md §7, op verzoek van de opdrachtgever.
+   De spec zei: geen video op mobiel, want het scheelt data, batterij en een
+   seconde. Hij wil hem er wél, en dan is de vraag niet "of" maar "hoe duur".
+   Antwoord: een eigen staande uitsnede op 720px breed en CRF 33 — gemiddeld
+   475 KB tegenover 1,2 MB voor de liggende versie. De <source media=...>
+   in de HTML kiest hem; de telefoon laadt de zware nooit. */
+
+/* ---------- 15. Toegevoegd bij het bouwen ---------- */
+/* De hero-hoogte komt uit de generator, zodat een tweede hero op dezelfde
+   pagina lager kan zijn dan de eerste zonder een tweede klasse. */
+.hero{height:var(--hoog,78vh)}
+@media (max-width:767px){ .hero{height:min(var(--hoog,78vh),78vh)} }
+
+/* Twee ingangen op Home: beeld, titel, één regel eronder. Geen kaart, geen
+   rand, geen schaduw — het beeld staat gewoon op de grond. */
+.ingang{display:grid;gap:14px;text-decoration:none;color:inherit}
+.ingang img{width:100%;aspect-ratio:3/4;object-fit:cover}
+.ingang .collectietitel{display:block;color:var(--chalk)}
+.ingang .ingang-onder{display:block;font-size:15px;color:var(--slate);line-height:1.55;max-width:38ch}
+.ingang:hover .collectietitel{color:#fff}
+.ingang:hover img{filter:brightness(1.06)}
+.ingang img{transition:filter .4s ease}
+
+/* De lichtste sport met een zin eronder (alleen op Bridal). */
+.cta-licht-blok{margin-top:var(--tekst-link)}
+.cta-licht-blok span{display:block;margin-top:10px;font-size:15px;color:var(--slate);line-height:1.55}
+
+/* De ondertekening onder de atelier-tekst: klein, rechts, geen functietitel. */
+.ondertekening{margin-top:40px;text-align:right;font-size:12px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ash)}
+
+/* Het proces staat in een <ol>; de eigen nummering vervangt die van de browser. */
+ol.stappen{list-style:none}
+
+/* ---------- 16. De naam in de hero ----------
+   TERUG OP VERZOEK. Het veldonderzoek zei: geen didone, alle vijftien huizen
+   draaien één schreefloze. Volkert koos de mockup, en daar stond de naam in
+   Bodoni — dat is wat hij goed vond. Dus komt hij terug, maar ALLEEN hier:
+   de naam in de hero en nergens anders. De navigatie, de lopende tekst, de
+   labels en het formulier blijven Jost. Eén afwijking, één plek. */
+.hero-naam{
+  font-family:"Bodoni Moda",Didot,"Times New Roman",serif;
+  font-weight:400;
+  font-size:clamp(38px,9vw,86px);
+  line-height:.94;
+  letter-spacing:-.01em;
+  text-transform:none;          /* een naam schreeuwt niet in kapitalen */
+  color:var(--on-image);
+  margin:0;
+  text-shadow:0 1px 24px rgba(0,0,0,.5);
+}
+
+/* ---------- 17. Scrim aan de bovenkant ----------
+   GEVONDEN BIJ HET NAKIJKEN. DESIGN.md §7 rekent de scrim alleen onderaan door,
+   waar de tekst staat. Maar de navigatie ligt óók over het beeld, en in de
+   eerste schermafdruk viel "BRIDAL" weg tegen een lichte plek in de foto.
+   Zelfde redenering als de onderste scrim, gespiegeld: een verloop van boven
+   naar beneden dat op 26% van de hoogte niets meer doet, plus de schaduw als
+   tweede vangnet. Het beeld blijft daaronder onaangetast. */
+.hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:linear-gradient(to bottom,rgba(10,10,11,.62) 0%,rgba(10,10,11,.34) 12%,rgba(10,10,11,0) 26%);
+}
+.kop-balk:not(.vast) .nav a,
+.kop-balk:not(.vast) .woordmerk,
+.kop-balk:not(.vast) .menuknop{ text-shadow:0 1px 18px rgba(0,0,0,.75) }
+
+/* ---------- 18. Alle film in zwart-wit ----------
+   GEVONDEN OP MOBIEL. De stills zijn zwart-wit, de Pixabay-clips niet — de
+   opening sloeg om van monochroom naar warm bruin zodra de film overnam.
+   Eén filter trekt beide bronnen in dezelfde wereld, en het is meteen de
+   reden dat geleend en gegenereerd beeld naast elkaar kunnen staan zonder
+   dat je ziet welk welk is. */
+.hero video{filter:grayscale(1) contrast(1.06) brightness(.94)}

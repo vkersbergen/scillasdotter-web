@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Enquire — SCILLASDOTTER</title>
+<meta name="description" content="Write to Alexandra Scillasdotter. Every enquiry is answered personally within 48 hours. The first conversation is free, and nothing is decided in it.">
+<meta property="og:title" content="Enquire — SCILLASDOTTER">
+<meta property="og:description" content="Write to Alexandra Scillasdotter. Every enquiry is answered personally within 48 hours. The first conversation is free, and nothing is decided in it.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.scillasdotter.com/enquire.html">
+<link rel="canonical" href="https://www.scillasdotter.com/enquire.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=Jost:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="overslaan" href="#hoofd">Skip to content</a>
+
+<header class="kop-balk vast">
+  <a class="woordmerk" href="index.html">Scillasdotter</a>
+  <nav class="nav" aria-label="Main">
+      <a href="couture.html">Couture</a>
+      <a href="bridal.html">Bridal</a>
+      <a href="collections.html">Collections</a>
+      <a href="atelier.html">Atelier</a>
+      <a href="process.html">The Process</a>
+      <a href="enquire.html" aria-current="page">Enquire</a>
+  </nav>
+  <button class="menuknop" aria-expanded="false" aria-controls="menu">Menu</button>
+</header>
+
+<div class="overlay" id="menu" hidden>
+  <button class="menuknop sluit" aria-label="Close menu">Close</button>
+  <a href="couture.html">Couture</a>
+  <a href="bridal.html">Bridal</a>
+  <a href="collections.html">Collections</a>
+  <a href="atelier.html">Atelier</a>
+  <a href="process.html">The Process</a>
+  <a href="enquire.html">Enquire</a>
+</div>
+
+<main id="hoofd">
+  <section class="sectie omhulsel">
+    <div class="kolom">
+      <h1>Write to Alexandra</h1>
+      <p>Every enquiry comes to me, and I answer it myself.<br>
+         There is no wrong way to start — a question is enough.</p>
+    </div>
+  </section>
+
+  <section class="omhulsel" style="padding-bottom:var(--breuk)">
+    <form class="formulier" method="post" action="#" novalidate>
+      <div class="veld">
+        <label class="veldlabel" for="naam">Name</label>
+        <input id="naam" name="name" type="text" autocomplete="name" required>
+      </div>
+
+      <div class="veld">
+        <label class="veldlabel" for="whatsapp">Whatsapp Number</label>
+        <p class="hulp" id="hulp-wa">Including country code — this is where I usually reply.</p>
+        <input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel"
+               aria-describedby="hulp-wa" required>
+      </div>
+
+      <div class="veld">
+        <label class="veldlabel" for="email">Email</label>
+        <p class="hulp" id="hulp-mail">Optional, if you would rather not use WhatsApp.</p>
+        <input id="email" name="email" type="email" autocomplete="email" aria-describedby="hulp-mail">
+      </div>
+
+      <div class="veld">
+        <label class="veldlabel" for="onderwerp">What is this about?</label>
+        <select id="onderwerp" name="subject" required>
+          <option value="Couture">Couture</option>
+          <option value="Bridal">Bridal</option>
+          <option value="Collections">A collection or a tour</option>
+          <option value="Tailoring">Tailoring</option>
+          <option value="Press">Press</option>
+          <option value="Something else">Something else</option>
+        </select>
+      </div>
+
+      <div class="veld" id="datum-veld" hidden>
+        <label class="veldlabel" for="datum">Wedding date (if known)</label>
+        <p class="hulp" id="hulp-datum">Or roughly when — a season is fine.</p>
+        <input id="datum" name="wedding_date" type="text" aria-describedby="hulp-datum">
+      </div>
+
+      <fieldset class="veld" style="border:0;padding:0;margin:0">
+        <legend class="veldlabel" style="padding:0">How would you like me to reply?</legend>
+        <div class="keuzerij">
+          <label><input type="radio" name="reply" value="WhatsApp" checked> WhatsApp</label>
+          <label><input type="radio" name="reply" value="Phone call"> Phone call</label>
+          <label><input type="radio" name="reply" value="Email"> Email</label>
+        </div>
+      </fieldset>
+
+      <div class="veld">
+        <label class="veldlabel" for="bericht">Your message</label>
+        <p class="hulp" id="hulp-bericht">Tell me about the piece you are imagining, and when you
+          need it. A few lines is plenty.</p>
+        <textarea id="bericht" name="message" aria-describedby="hulp-bericht" required></textarea>
+      </div>
+
+      <button class="verzend" type="submit">Send</button>
+    </form>
+
+    <div class="kolom" style="margin-top:var(--sectie)">
+      <p>Would you rather talk it through first? Say so in the message. The first conversation is
+        free, and nothing is decided in it.</p>
+      <p>Or ask me one thing: <a class="cta-licht" href="mailto:couture@scillasdotter.com">couture@scillasdotter.com</a>. I read everything myself.</p>
+      <p class="afspraak">By appointment only · Currently Amsterdam · Online meetings welcome</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="voet">
+  <div class="voet-binnen">
+    <div>
+      <a class="woordmerk" href="index.html">Scillasdotter</a>
+      Couture by Alexandra Scillasdotter.<br>
+      Made to measure. Currently Amsterdam, but online meetings welcome.<br>
+      Consultations and fittings by appointment only.
+      <p style="margin-top:20px;display:flex;flex-wrap:wrap;gap:18px"><a href="couture.html">Couture</a>  <a href="bridal.html">Bridal</a>  <a href="collections.html">Collections</a>  <a href="atelier.html">Atelier</a>  <a href="process.html">The Process</a>  <a href="enquire.html">Enquire</a></p>
+    </div>
+    <div>
+      Email &nbsp; <a href="mailto:couture@scillasdotter.com">couture@scillasdotter.com</a><br>
+      WhatsApp &nbsp; <a href="https://wa.me/4676426582">+4676426582</a>
+      <p style="margin-top:20px">© 2026 Scillasdotter</p>
+    </div>
+  </div>
+</footer>
+
+<script src="site.js" defer></script>
+</body>
+</html>
