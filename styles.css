@@ -779,3 +779,11 @@ main > section:last-child{padding-bottom:var(--sectie)}
 }
 .taalkeuze select:hover{color:var(--chalk)}
 .taalkeuze select option{background:var(--ink-900);color:var(--chalk)}
+
+/* De twee koppen boven de credits: klein en rustig, met lucht eronder. Ze
+   stonden strak boven de eerste naam en leken daar bij te horen. */
+.kop-klein{
+  font-size:12px;letter-spacing:.20em;text-transform:uppercase;font-weight:500;
+  color:var(--slate);margin:0 0 34px;line-height:1;
+}
+@media (min-width:768px){ .kop-klein{margin-bottom:44px} }
