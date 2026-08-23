@@ -897,7 +897,9 @@ main > section:last-child{padding-bottom:var(--sectie)}
   .voet-slot > *:not(:first-child)::before{content:"\00B7";margin-right:9px;color:var(--slate)}
 }
 @media (max-width:767px){
-  .voet-slot{column-gap:18px}
+  /* Jaartal op een eigen regel, de drie links daaronder naast elkaar. */
+  .voet-slot{column-gap:14px;row-gap:6px}
+  .voet-slot > span:first-child{flex:0 0 100%}
   /* De lege labelkolom kost hier ruimte die de regel nodig heeft. */
   .voet-contact .rij:last-child{display:block}
   .voet-contact .rij:last-child > span:first-child{display:none}
