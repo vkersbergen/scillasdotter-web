@@ -814,7 +814,10 @@ main > section:last-child{padding-bottom:var(--sectie)}
      zonder de regelhoogte te veranderen, dus de zin blijft een zin. */
   .kolom.lang p a,.kolom.lang li a,.opsomming a{padding-block:11px}
   .cta-midden{min-height:44px}
-  .kopieer{min-height:40px;font-size:12px}
+  /* Op een telefoon breekt de zin met het adres, en dan hangt de knop
+     ingesprongen halverwege. Op een eigen regel aan de linkerkant staat hij
+     gelijk met de tekst erboven en eronder. */
+  .kopieer{min-height:44px;font-size:12px;display:block;margin:12px 0 4px}
   .keuzerij label{display:inline-flex;align-items:center;min-height:44px}
 
   /* 11px is te klein om te lezen op een telefoon. */
