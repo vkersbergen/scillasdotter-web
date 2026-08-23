@@ -809,6 +809,10 @@ main > section:last-child{padding-bottom:var(--sectie)}
   /* Een link midden in een zin mag niet uit de regel springen. Padding op een
      inline element vergroot wel het raakvlak en niet de regelhoogte. */
   .cta-licht{padding-block:11px}
+  /* De links in de artikelen komen uit markdown en hebben geen klasse. Gemeten
+     op 375 breed waren ze 18 tot 25px hoog. Padding vergroot het raakvlak
+     zonder de regelhoogte te veranderen, dus de zin blijft een zin. */
+  .kolom.lang p a,.kolom.lang li a,.opsomming a{padding-block:11px}
   .cta-midden{min-height:44px}
   .kopieer{min-height:40px;font-size:12px}
   .keuzerij label{display:inline-flex;align-items:center;min-height:44px}
@@ -845,7 +849,20 @@ main > section:last-child{padding-bottom:var(--sectie)}
 .journaal a{
   display:grid;gap:10px;padding:28px 0;text-decoration:none;
 }
-@media (min-width:768px){ .journaal a{padding:38px 0;gap:14px} }
+@media (min-width:768px){
+  /* Titel en tekst links, het beeld rechts. Dat vult de kant die anders leeg
+     staat en maakt de lijst scanbaar in plaats van een muur tekst. */
+  .journaal a{padding:32px 0;gap:40px;grid-template-columns:minmax(0,1fr) minmax(0,300px);align-items:center}
+}
+@media (min-width:1080px){ .journaal a{grid-template-columns:minmax(0,1fr) minmax(0,360px)} }
+.journaal .tekst{display:grid;gap:12px}
+.journaal h2.wie{margin:0;text-transform:none;font-weight:400}
+.journaal p.wat{margin:0}
+.journaal .beeld{display:block;overflow:hidden;background:var(--ink-800);order:-1}
+@media (min-width:768px){ .journaal .beeld{order:0} }
+.journaal .beeld img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;
+  filter:grayscale(.2) contrast(1.02);transition:filter .4s ease,transform .6s ease}
+.journaal a:hover .beeld img{filter:grayscale(0) contrast(1.04);transform:scale(1.02)}
 /* Eén kolom. Twee kolommen naast elkaar duwden de omschrijving in een strook
    van een paar woorden breed, en een titel van tien woorden leest niet als hij
    in vier regels valt. */
