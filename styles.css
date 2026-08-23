@@ -857,3 +857,15 @@ main > section:last-child{padding-bottom:var(--sectie)}
 .journaal .wat{color:var(--slate);line-height:1.6;font-size:15px;max-width:62ch}
 .journaal a:hover .wie{color:var(--on-image)}
 .journaal a:hover .wat{color:var(--silver)}
+
+/* ---------- Vragen in de voet ----------
+   Waarvoor: de vragen staan op de procespagina, maar iemand die onderaan een
+   artikel is beland zoekt ze daar niet. Dit is de kortste weg ernaartoe, en
+   Google leest de vraagzinnen mee. */
+.voet-vragen{display:grid;gap:10px;margin-top:26px;padding-top:22px;border-top:1px solid var(--edge-soft)}
+.voet-vragen .voet-kop{font-size:11px;letter-spacing:.20em;text-transform:uppercase;color:var(--slate)}
+.voet-vragen a{color:var(--silver);text-decoration:none;font-size:14px;line-height:1.5;
+  border-bottom:1px solid transparent;justify-self:start}
+.voet-vragen a:hover{color:var(--chalk);border-bottom-color:var(--edge)}
+.voet-vragen a.cta-licht{margin-top:6px;font-size:13px;color:var(--slate)}
+@media (max-width:767px), (pointer:coarse){ .voet-vragen a{min-height:44px;display:inline-flex;align-items:center} }
