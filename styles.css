@@ -885,4 +885,14 @@ main > section:last-child{padding-bottom:var(--sectie)}
   border-bottom:1px solid transparent;justify-self:start}
 .voet-vragen a:hover{color:var(--chalk);border-bottom-color:var(--edge)}
 .voet-vragen a.cta-licht{margin-top:6px;font-size:13px;color:var(--slate)}
-@media (max-width:767px), (pointer:coarse){ .voet-vragen a{min-height:44px;display:inline-flex;align-items:center} }
+.voet-faq{display:none}
+/* Mobiel: drie uitgeschreven vragen onder elkaar lijnen rommelig uit in de voet.
+   Daar blijft alleen het kopje FAQ over, dat naar dezelfde plek gaat. */
+@media (max-width:767px), (pointer:coarse){
+  .voet-vragen a{min-height:44px;display:inline-flex;align-items:center}
+  .voet-vragen .voet-kop,
+  .voet-vragen a:not(.voet-faq){display:none}
+  .voet-vragen a.voet-faq{display:inline-flex;font-size:11px;letter-spacing:.20em;
+    text-transform:uppercase;color:var(--slate)}
+  .voet-vragen a.voet-faq:hover{color:var(--chalk)}
+}
