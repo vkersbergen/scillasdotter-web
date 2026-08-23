@@ -178,7 +178,7 @@
     try { document.execCommand('copy'); klaar(); } catch (e) { /* dan niet */ }
     v.remove();
   }
-  /* 8. Taal. Het menu wisselt tussen / en /sv/ op dezelfde pagina.
+  /* 8. Taal. Het menu wisselt tussen /, /sv/ en /nl/ op dezelfde pagina.
 
         Waarom de browsertaal en niet het land: het land bepalen vraagt een
         dienst van derden die het IP-adres van elke bezoeker te zien krijgt, en
@@ -187,26 +187,25 @@
 
         Kiest iemand zelf, dan onthouden we dat en gaan we hem daarna nooit meer
         verplaatsen. */
+  var TALEN = ['sv', 'nl'];
   var kiezer = document.getElementById('taal');
   /* Welke taal deze pagina is staat in de pagina zelf. Dat is betrouwbaarder
      dan het pad aflezen, want in een voorbeeldomgeving staat de site in een
      submap en klopt /sv/ aan het begin niet meer. */
-  var opSv = document.documentElement.lang === 'sv';
+  var nuTaal = document.documentElement.lang || 'en';
 
   function naarTaal(t) {
     var p = location.pathname;
-    var m = p.match(/^(.*?)(?:\/sv)?\/([^\/]*)$/);
+    var m = p.match(/^(.*?)(?:\/(?:sv|nl))?\/([^\/]*)$/);
     if (!m) return;
     var basis = m[1] || '';
     var bestand = (m[2] === 'index.html') ? '' : m[2];
-    var doel = basis + (t === 'sv' ? '/sv/' : '/') + bestand;
+    var doel = basis + (t === 'en' ? '/' : '/' + t + '/') + bestand;
     if (doel !== p) location.replace(doel + location.hash);
   }
 
   if (kiezer) {
-    /* Welke taal aan staat komt uit de pagina zelf, niet uit de HTML van het
-       menu. Anders moet de vertaling ook nog het woordje selected verzetten. */
-    kiezer.value = opSv ? 'sv' : 'en';
+    kiezer.value = nuTaal;
     kiezer.addEventListener('change', function () {
       try { localStorage.setItem('taal', kiezer.value); } catch (e) {}
       naarTaal(kiezer.value);
@@ -216,9 +215,10 @@
   try {
     var gekozen = localStorage.getItem('taal');
     if (gekozen) {
-      if ((gekozen === 'sv') !== opSv) naarTaal(gekozen);
-    } else if (!opSv && /^sv\b/i.test(navigator.language || '')) {
-      naarTaal('sv');
+      if (gekozen !== nuTaal) naarTaal(gekozen);
+    } else if (nuTaal === 'en') {
+      var browser = (navigator.language || '').slice(0, 2).toLowerCase();
+      if (TALEN.indexOf(browser) !== -1) naarTaal(browser);
     }
   } catch (e) { /* geen opslag: dan blijft het gewoon Engels */ }
 })();
