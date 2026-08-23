@@ -193,9 +193,20 @@
      dan het pad aflezen, want in een voorbeeldomgeving staat de site in een
      submap en klopt /sv/ aan het begin niet meer. */
   var nuTaal = document.documentElement.lang || 'en';
+  /* Sommige pagina's bestaan maar in één taal, het journaal bijvoorbeeld. Daar
+     mag niemand automatisch naartoe verplaatst worden, want dan komt hij op een
+     pagina die er niet is. Wisselen mag wel, maar dan naar de voorpagina van
+     die taal. */
+  var eentalig = document.documentElement.hasAttribute('data-eentalig');
 
   function naarTaal(t) {
     var p = location.pathname;
+    if (eentalig) {
+      var m0 = p.match(/^(.*?)(?:\/(?:sv|nl))?\/[^\/]*$/);
+      var wortel = (m0 ? m0[1] : '') + (t === 'en' ? '/' : '/' + t + '/');
+      location.replace(wortel);
+      return;
+    }
     var m = p.match(/^(.*?)(?:\/(?:sv|nl))?\/([^\/]*)$/);
     if (!m) return;
     var basis = m[1] || '';
@@ -214,9 +225,11 @@
 
   try {
     var gekozen = localStorage.getItem('taal');
-    if (gekozen) {
+    if (eentalig) {
+      /* niets doen: deze pagina bestaat alleen hier */
+    } else if (gekozen) {
       if (gekozen !== nuTaal) naarTaal(gekozen);
-    } else if (nuTaal === 'en') {
+    } else if (!eentalig && nuTaal === 'en') {
       var browser = (navigator.language || '').slice(0, 2).toLowerCase();
       if (TALEN.indexOf(browser) !== -1) naarTaal(browser);
     }

@@ -830,9 +830,30 @@ main > section:last-child{padding-bottom:var(--sectie)}
   filter:grayscale(.15) contrast(1.02)}
 .opsomming{margin:0 0 var(--kop-tekst);padding:0 0 0 20px;color:var(--silver)}
 .opsomming li{margin-bottom:10px;line-height:1.65}
-.credits li a{text-decoration:none;display:grid;gap:6px}
-@media (min-width:768px){ .credits li a{grid-template-columns:minmax(240px,44%) 1fr;gap:32px;align-items:baseline} }
-.credits li a:hover .wie{color:var(--on-image)}
 .kolom.lang h2{margin-top:var(--sectie);margin-bottom:var(--kop-tekst)}
 .kolom.lang h3{margin-top:var(--stap);margin-bottom:12px;font-size:15px;letter-spacing:.08em;
   text-transform:none;color:var(--chalk);font-weight:400}
+
+/* ---------- Journaal-overzicht ----------
+   GEVONDEN BIJ HET NAKIJKEN. Dit stond eerst op .credits, maar daar is de li
+   zelf al een raster van twee kolommen. De link erbinnen maakte er nog een
+   raster van, en dan wordt de tekstkolom een derde van een derde: één woord
+   breed. Hier is de li een gewoon blok en draagt de link het raster. */
+.journaal{list-style:none;margin:0;padding:0}
+.journaal li{border-top:1px solid var(--edge-soft)}
+.journaal li:first-child{border-top:0}
+.journaal a{
+  display:grid;gap:10px;padding:28px 0;text-decoration:none;
+}
+@media (min-width:768px){ .journaal a{padding:38px 0;gap:14px} }
+/* Eén kolom. Twee kolommen naast elkaar duwden de omschrijving in een strook
+   van een paar woorden breed, en een titel van tien woorden leest niet als hij
+   in vier regels valt. */
+.journaal .wie{
+  font-size:clamp(20px,2.8vw,27px);line-height:1.22;color:var(--chalk);
+  letter-spacing:-.01em;text-wrap:balance;max-width:22ch;
+}
+@media (min-width:768px){ .journaal .wie{max-width:30ch} }
+.journaal .wat{color:var(--slate);line-height:1.6;font-size:15px;max-width:62ch}
+.journaal a:hover .wie{color:var(--on-image)}
+.journaal a:hover .wat{color:var(--silver)}
