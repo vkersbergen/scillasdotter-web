@@ -891,7 +891,17 @@ main > section:last-child{padding-bottom:var(--sectie)}
   .voet-vragen a{min-height:44px;display:inline-flex;align-items:center}
 }
 .voet-slot{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:9px;row-gap:2px}
-.voet-slot > *:not(:first-child)::before{content:"\00B7";margin-right:9px;color:var(--slate)}
+/* Scheidingstekens alleen waar de regel op een lijn past. Op een telefoon
+   breekt hij toch, en dan blijft er een zwevend punt voor- of achteraan staan. */
+@media (min-width:768px){
+  .voet-slot > *:not(:first-child)::before{content:"\00B7";margin-right:9px;color:var(--slate)}
+}
+@media (max-width:767px){
+  .voet-slot{column-gap:18px}
+  /* De lege labelkolom kost hier ruimte die de regel nodig heeft. */
+  .voet-contact .rij:last-child{display:block}
+  .voet-contact .rij:last-child > span:first-child{display:none}
+}
 
 /* Alleen op smalle schermen weg, niet op pointer:coarse: een laptop met
    aanraakscherm meldt coarse en heeft de ruimte wel. Op mobiel staat FAQ
