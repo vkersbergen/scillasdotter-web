@@ -22,7 +22,7 @@
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#0A0A0B">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; media-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self'; form-action 'self' https://formsubmit.co; base-uri 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; media-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; form-action 'self' https://formsubmit.co; base-uri 'self'; upgrade-insecure-requests">
 <link rel="canonical" href="https://www.scillasdotter.com/atelier.html">
 <link rel="alternate" hreflang="en" href="https://www.scillasdotter.com/atelier.html">
 <link rel="alternate" hreflang="sv" href="https://www.scillasdotter.com/sv/atelier.html">
@@ -130,5 +130,8 @@
 </footer>
 
 <script src="site.js?v=d9cf554e" defer></script>
+<!-- Cloudflare Web Analytics: cookieloos, dus geen toestemmingsbanner nodig.
+     Het token hoort publiek te zijn, het staat in elke pagina. -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "6fba62689e8f48309364008a6f5078e1"}'></script>
 </body>
 </html>
