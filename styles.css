@@ -890,6 +890,9 @@ main > section:last-child{padding-bottom:var(--sectie)}
 @media (max-width:767px), (pointer:coarse){
   .voet-vragen a{min-height:44px;display:inline-flex;align-items:center}
 }
+.voet-slot{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:9px;row-gap:2px}
+.voet-slot > *:not(:first-child)::before{content:"\00B7";margin-right:9px;color:var(--slate)}
+
 /* Alleen op smalle schermen weg, niet op pointer:coarse: een laptop met
    aanraakscherm meldt coarse en heeft de ruimte wel. Op mobiel staat FAQ
    als gewone link in het raster erboven. */
