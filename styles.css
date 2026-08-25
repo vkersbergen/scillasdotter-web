@@ -310,16 +310,24 @@ h1+p,h2+p{margin-top:var(--kop-tekst)}
    het rooster, dus de linkerrand valt samen met tegel I en de rechterrand met
    tegel III — dat is de uitlijning die van negen losse foto's een blok maakt.
    Geen H2: twintig pixels onder een H1 die "Couture" zegt is een tweede kop een
-   stem erbij, en dit ontwerp gaat over weglaten. */
-.rasterkop{
+   stem erbij, en dit ontwerp gaat over weglaten.
+
+   EÉN COMPONENT, TWEE PLEKKEN. Dezelfde rail staat sinds 26 augustus 2026 ook
+   boven een blok binnen een band (`.bandkop`, §21). Daar is hij eenzijdig: één
+   woordgroep links, geen tweede rechts. De regel is niet "boven een rooster"
+   maar: waar een blok een bovenrand nodig heeft en een kop een stem te veel is,
+   staat er een rail. Vandaar dat de kleurregels op `span + span` staan en niet
+   op `:last-child` — met één span was dat --slate en las het label als de
+   bijzin in plaats van als het opschrift. */
+.rasterkop,.bandkop{
   display:flex;justify-content:space-between;align-items:baseline;gap:var(--goot);
   border-top:1px solid var(--edge-soft);padding-top:14px;margin-bottom:32px;
   font-size:12px;line-height:1.40;letter-spacing:.18em;font-weight:500;
   text-transform:uppercase;
 }
-.rasterkop span:first-child{color:var(--ash)}
-.rasterkop span:last-child{color:var(--slate)}
-@media (max-width:767px){ .rasterkop{display:grid;gap:6px} }
+.rasterkop span,.bandkop span{color:var(--ash)}
+.rasterkop span+span,.bandkop span+span{color:var(--slate)}
+@media (max-width:767px){ .rasterkop,.bandkop{display:grid;gap:6px} }
 .look{margin:0}
 .look img{width:100%;aspect-ratio:3/4;object-fit:cover}
 /* Een rij met liggende beelden: een staande uitsnede zou de tafel en het
@@ -1150,22 +1158,39 @@ main > section:last-child{padding-bottom:var(--sectie)}
   .werkfilm video{display:none}
   .werkfilm img{filter:grayscale(1) contrast(1.06) brightness(.94)}
 }
-/* DE SLOTBAND. De procespagina eindigde op drie losse tekstsecties op de gewone
-   grond: eerst de doorlooptijd en de prijs, dan de slotregel met de knop, en
-   daaronder nog de vragen. De film in het midden was daardoor het zwaarste
-   element van de pagina en alles erna zakte weg — precies wat de opdrachtgever
-   "gek" noemde.
+/* DE RECHTERKOLOM DRAAGT TWEE BLOKKEN, EN DAAROM IS DE SLOTBAND WEG.
+   26 augustus 2026. Gemeten op 1440, en de meting is de hele reden:
 
-   Nu heeft de pagina twee banden en een ruggengraat: de vijf stappen in
-   woorden, de band met de film als bewijs, en aan het eind de band met de
-   vraag. Dezelfde grond als de filmband, want het is hetzelfde soort onderbreking;
-   alleen één tekstkolom in plaats van beeld naast tekst. De vragen zijn
-   vertrokken naar Enquire, dus de band is nu ook echt het slot. */
-.slotband .binnen{grid-template-columns:minmax(0,620px)}
-@media (min-width:1000px){ .slotband .binnen{grid-template-columns:minmax(0,620px)} }
-.slotband .afspraak{margin-top:var(--stap)}
+   - de film is 320 breed en 478 hoog; de filmtekst ernaast was 211 hoog. Onder
+     die tekst stond dus 267px niets, binnen de band zelf;
+   - daarna volgden twee losse tekstsecties van 164 en 206 hoog, met 240 en 241
+     lucht ertussen. Blokken en gaten waren even groot, allebei ongeveer 200px,
+     en dan is er geen verschil meer tussen inhoud en pauze;
+   - de knop stond op y=3086 van een pagina van 4022: na twee gaten, onderaan.
 
-.filmtekst .label{margin:0 0 12px}
+   Het waren dus drie losse alinea's naast een halve kolom leegte. De
+   doorlooptijd en de prijs zijn nu het tweede blok in dezelfde kolom als de
+   filmtekst, onder een eigen rail. Dat doet drie dingen tegelijk: het gat in
+   de band is gevuld, één van de twee gaten bestaat niet meer, en de kolom is
+   482 hoog naast een film van 478 — de twee kolommen delen nu een bovenrand
+   én een onderrand in plaats van alleen een bovenrand.
+
+   De slotband is daarmee overbodig geworden. Hij bestond omdat er na de film
+   nog drie dingen kwamen die anders wegzakten. Er komt nu één ding: de
+   slotregel met het enige gevulde vlak van de site (§8.8). Een wit vlak zakt
+   nergens in weg, en de procespagina eindigt daarmee precies zoals Couture,
+   Bridal en Atelier eindigen — een tekstkolom op de gewone grond, met de CTA
+   die bij díé pagina hoort. Eén slotvorm voor de hele site is beter dan een
+   eigen vorm voor één pagina.
+
+   DE RAILS. Boven allebei de blokken staat de rail uit §9: een haarlijn en één
+   woordgroep in 12px kapitaal. De bovenste haarlijn valt op de pixel samen met
+   de bovenrand van het beeld ernaast — dat is de uitlijning die de kolom en de
+   film aan elkaar knoopt. De tweede haarlijn zegt wat de eerste ook zegt: hier
+   begint iets anders. Zonder die lijn zouden de doorlooptijd en de prijs lezen
+   als een vervolg op het verhaal over de zomerjurk, en dat zijn ze niet. */
+.filmtekst .bandkop{margin-top:var(--stap)}
+.filmtekst .bandkop:first-child{margin-top:0}
 .filmtekst h3{margin:0 0 var(--kop-tekst);font-size:17px;line-height:1.30;
   letter-spacing:.10em;text-transform:uppercase;font-weight:400;color:var(--chalk)}
 .filmtekst p{color:var(--silver)}
