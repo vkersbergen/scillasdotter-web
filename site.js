@@ -30,7 +30,11 @@
         En hij speelt alleen als hij in beeld staat — een film die onder de
         vouw staat te draaien kost batterij en levert niets op. */
   if (!stil) {
-    var films = Array.prototype.slice.call(document.querySelectorAll('.hero video'));
+    /* Ook de werkfilm op Process draait mee in deze lus: posterbeeld eerst,
+   spelen alleen als hij in beeld staat, en helemaal niet als iemand
+   beweging heeft uitgezet. Eén selector erbij is goedkoper dan een
+   tweede mechaniek die hetzelfde probeert. */
+    var films = Array.prototype.slice.call(document.querySelectorAll('.hero video, .werkfilm video'));
     films.forEach(function (v) {
       v.addEventListener('canplaythrough', function () { v.classList.add('klaar'); }, { once: true });
     });

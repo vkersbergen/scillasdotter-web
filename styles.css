@@ -253,16 +253,97 @@ h1+p,h2+p{margin-top:var(--kop-tekst)}
 .raster{display:grid;gap:var(--goot);row-gap:calc(var(--goot) * 1.5);grid-template-columns:1fr}
 @media (min-width:768px){ .raster{grid-template-columns:repeat(2,1fr)} }
 @media (min-width:1180px){ .raster.drie{grid-template-columns:repeat(3,1fr)} }
-.look figure{margin:0}
+/* DIT WAS DE UITLIJNFOUT, 25 augustus 2026. Hier stond `.look figure{margin:0}`,
+   en dat selecteert een figure BINNEN .look — die bestaat niet, want .look IS de
+   figure. De browserstandaard `figure{margin:1em 40px}` bleef dus staan. Gemeten
+   op 1440: een baan van het raster is 432px, het beeld erin 352px, en het hele
+   rooster stond 40px naar binnen ten opzichte van de H1 erboven. De goot leek
+   104px in plaats van de 24px uit §5, en de rijafstand 70px in plaats van 36px.
+   Met twee kolommen viel het niet op; met drie werd het meteen zichtbaar. */
+/* ONDER 768px IS HET ROOSTER EEN VEEGSTROOK, GEEN SLIERT.
+   Negen staande beelden onder elkaar is op 390 breed ruim zevenduizend pixels
+   scrollen voor een pagina die verder uit twee alinea's bestaat. Dat is geen
+   overzicht meer maar een rij; je kunt er niet in kijken en je komt er niet
+   doorheen.
+
+   Horizontaal, en zonder JavaScript. `scroll-snap-type:x mandatory` doet het
+   klikken, `scroll-snap-align:start` zet elke tegel op de linkermarge. De
+   strook loopt met een negatieve marge door tot de vensterrand — §5 staat toe
+   dat beeld de raster doorbreekt, tekst nooit — terwijl `padding-inline` de
+   eerste tegel precies onder de H1 houdt. `scroll-padding-inline` maakt het af:
+   zonder dat landt tegel II niet op de marge maar op nul.
+
+   DE TEGEL IS 76vw EN NIET 100vw, EN DAT IS DE HELE AFFORDANCE. Op 390 is dat
+   296px beeld met 58px van de volgende tegel ernaast. Dat stukje is de reden
+   dat niemand hoeft te lezen dat hij kan vegen. Twee tegels naast elkaar was de
+   andere kant op: 179px breed, en dan is een gezicht op een rode loper een
+   vlek. Op een couturesite wint beeldgrootte van aantal.
+
+   GEEN SCROLLBALK. De strook heeft er een nodig noch verdient er een: het
+   kijkje ernaast zegt hetzelfde, en een grijze balk onder een japon is precies
+   de ruis die §1 verbiedt. Toetsenbord en schermlezer lopen niet via de balk
+   maar via `role="group"`, `tabindex` en het label op de strook zelf.
+
+   De focusring gaat hier naar binnen. Buiten zou hij op de vensterrand vallen
+   en links en rechts afgesneden worden, want de strook loopt tot de rand door. */
+@media (max-width:767px){
+  .raster.veeg{
+    display:flex;gap:var(--goot);
+    overflow-x:auto;overscroll-behavior-x:contain;
+    scroll-snap-type:x mandatory;
+    scroll-padding-inline:var(--marge);
+    margin-inline:calc(var(--marge) * -1);
+    padding-inline:var(--marge);
+    scrollbar-width:none;
+  }
+  .raster.veeg::-webkit-scrollbar{display:none}
+  .raster.veeg > .look{flex:0 0 76vw;scroll-snap-align:start}
+  .raster.veeg:focus-visible{outline-offset:-2px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .raster.veeg{scroll-behavior:smooth}
+}
+
+/* DE KOP-RAIL BOVEN HET ROOSTER (§5, §8.3).
+   Een haarlijn over precies de breedte van het rooster, en daaronder links wat
+   je ziet en rechts uit welke tijd het komt. Hij staat in dezelfde omhulsel als
+   het rooster, dus de linkerrand valt samen met tegel I en de rechterrand met
+   tegel III — dat is de uitlijning die van negen losse foto's een blok maakt.
+   Geen H2: twintig pixels onder een H1 die "Couture" zegt is een tweede kop een
+   stem erbij, en dit ontwerp gaat over weglaten. */
+.rasterkop{
+  display:flex;justify-content:space-between;align-items:baseline;gap:var(--goot);
+  border-top:1px solid var(--edge-soft);padding-top:14px;margin-bottom:32px;
+  font-size:12px;line-height:1.40;letter-spacing:.18em;font-weight:500;
+  text-transform:uppercase;
+}
+.rasterkop span:first-child{color:var(--ash)}
+.rasterkop span:last-child{color:var(--slate)}
+@media (max-width:767px){ .rasterkop{display:grid;gap:6px} }
+.look{margin:0}
 .look img{width:100%;aspect-ratio:3/4;object-fit:cover}
 /* Een rij met liggende beelden: een staande uitsnede zou de tafel en het
    raam er half afsnijden. */
 .raster.breed .look img{aspect-ratio:4/3}
-.look figcaption{margin-top:14px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--ash);line-height:1.5}
+/* Het onderschrift van een look en dat van de werkfilm zijn hetzelfde ding: één
+   regel kapitaal met wat het is, en eronder één zin in zinskast met waarvoor.
+   Twee volle zinnen achter elkaar in 12px kapitaal wordt een blok dat niemand
+   leest, en de tegels eindigen dan alle negen op een andere hoogte. */
+/* `text-wrap:pretty` en niet met de hand een vaste spatie in de zin. Op 390
+   viel de V van "wrapped to a deep V" alleen op de tweede regel, en zulke
+   wezen ontstaan in drie talen op verschillende plekken — een oplossing in de
+   tekst zou je dus achttien keer moeten herhalen en na elke vertaling opnieuw
+   nalopen. De browser die het niet kent breekt zoals hij nu al breekt. */
+.look figcaption{margin-top:14px;font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--chalk);line-height:1.5;text-wrap:pretty}
 .look figcaption .nr{color:var(--slate);margin-right:8px}
-.look figcaption .toelichting{display:block;margin-top:6px;text-transform:none;letter-spacing:0;
-  font-size:14px;color:var(--slate);line-height:1.55}
+/* De gelegenheid stond op --slate/14px. Dat is de ondergrens van §3 op de
+   kleinste maat, en naast negen felle foto's las hij als een voetnoot bij het
+   onderschrift in plaats van als de helft ervan. Nu --ash (7,7:1) op 15px: nog
+   altijd stiller dan de stofregel erboven, maar leesbaar op armlengte. */
+.look figcaption .toelichting{display:block;margin-top:6px;
+  text-transform:none;letter-spacing:0;font-size:15px;color:var(--ash);line-height:1.55;
+  text-wrap:pretty}
 
 /* ---------- 10. Het proces (§8.5) ---------- */
 .stappen{list-style:none;margin:0;padding:0;display:grid;gap:var(--stap)}
@@ -270,6 +351,32 @@ h1+p,h2+p{margin-top:var(--kop-tekst)}
 .stapnummer{font-size:12px;letter-spacing:.16em;font-weight:500;color:var(--slate);line-height:1}
 .stap h3{margin:0;font-size:17px;letter-spacing:.10em;text-transform:uppercase;font-weight:400;color:var(--chalk)}
 .stap p{margin:0;color:var(--silver)}
+
+/* DE VIJF STAPPEN OP DE TELEFOON: HANGENDE NUMMERS, GEEN STROOK.
+   De vraag was of hier net als bij de roosters een veegstrook moest komen. Nee.
+   Een genummerde volgorde is precies het geval waarin horizontaal vegen schaadt:
+   je kunt stap 03 overslaan zonder het te merken, en erger, je ziet niet meer
+   dát het er vijf zijn. Dat je in één blik 01 tot 05 ziet ís de inhoud van deze
+   pagina; het veldwerk in §2 vond die nummering niet voor niets overal.
+
+   Wat wel kan: het nummer stond op een eigen regel boven de kop, dus elke stap
+   kostte drie regels waar er twee nodig zijn. Nu hangt het nummer links in de
+   marge, staat de kop ernaast op dezelfde grondlijn, en springt de alinea in
+   onder de kop. Dat is een hangende inspringing: het leest als een lijst van
+   vijf in plaats van als vijf losse blokken, en het scheelt per stap een regel
+   plus een tussenruimte. De haarlijn erboven doet wat de veertig pixels lucht
+   deden, in één pixel.
+
+   Alleen onder 768px. Op de laptop is er ruimte zat en blijft de stap staan
+   zoals hij goedgekeurd is. */
+@media (max-width:767px){
+  .stappen{gap:0}
+  .stap{grid-template-columns:auto minmax(0,1fr);column-gap:14px;row-gap:8px;
+        border-top:1px solid var(--edge-soft);padding-block:20px 26px}
+  .stap .stapnummer{grid-row:1;grid-column:1;align-self:baseline}
+  .stap h3{grid-row:1;grid-column:2;align-self:baseline}
+  .stap p{grid-row:2;grid-column:2}
+}
 
 /* ---------- 11. Op afspraak (§8.6) ---------- */
 .afspraak{
@@ -480,13 +587,57 @@ button.cta-midden:hover{color:var(--chalk)}
 /* ---------- 20. De vragen ----------
    Staat er voor twee lezers tegelijk: iemand die twijfelt, en de antwoord-
    machine die een citaat zoekt. Daarom letterlijke vragen als kop en een
-   antwoord dat op zichzelf klopt, los van de rest van de pagina. */
-.vragen{display:grid;gap:var(--stap);margin-top:var(--kop-tekst)}
-@media (min-width:1180px){ .vragen{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:var(--goot)} }
-.vraag-blok{max-width:620px;border-top:1px solid var(--edge-soft);padding-top:20px}
-.vraag-blok h3{margin:0 0 10px;font-size:16px;line-height:1.4;letter-spacing:.02em;
+   antwoord dat op zichzelf klopt, los van de rest van de pagina.
+
+   UITKLAPPEN, GEEN VEEGSTROOK — zie de toelichting bij faq_html() in build.py.
+   Gemeten op 390: zeven openstaande antwoorden waren 1449px, ruim een kwart van
+   de procespagina. Dichtgeklapt zie je alle zeven vragen tegelijk, en dat is
+   het enige waar een FAQ voor is: staat de mijne erbij.
+
+   De lijst is nu rij aan rij met haarlijnen in plaats van blokken met veertig
+   pixels ertussen. Dat is wat een dichtgeklapte lijst nodig heeft: bij een
+   openstaand antwoord scheidde die lucht twee tekstblokken, bij zeven regels
+   maakt hij er zeven zwevende regels van.
+
+   HET TEKEN IS TWEE HAARLIJNEN, GEEN ICOON EN GEEN LETTER. Er is geen
+   iconenset op deze site en een "+" als tekst zou door een schermlezer worden
+   voorgelezen bovenop de open- of dichtstaat die <summary> zelf al aankondigt.
+   Dit is een leeg ::after met twee verlopen van 1px: een plus die een min wordt
+   doordat de verticale streep naar nul zakt. Zelfde materiaal als elke andere
+   lijn in §3. */
+/* EEN KOLOM, OOK OP DE LAPTOP. Hier stonden twee kolommen vanaf 1180px, en dat
+   was juist zolang alle antwoorden openstonden: dan bespaarde het hoogte.
+   Dichtgeklapt bespaart het niets en kost het wel iets — de twee cellen van een
+   rij rekken mee met de langste, dus zodra je links een antwoord opent zakt de
+   haarlijn rechts een half scherm weg en staat de lijst scheef. Gemeten in de
+   afdruk van 1440 voordat dit veranderde.
+
+   Eén kolom van 620px is bovendien gewoon de tekstmaat uit §5, en de haarlijnen
+   lopen dan onafgebroken door. Zeven dichtgeklapte vragen zijn ook op een
+   laptop maar een halve schermhoogte. */
+.vragen{display:grid;gap:0;margin-top:var(--kop-tekst)}
+.vraag-blok{max-width:620px;border-top:1px solid var(--edge-soft)}
+.vraag-blok summary{
+  list-style:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding-block:13px;min-height:44px;   /* 44px is de kleinste eerlijke raakvlak */
+}
+.vraag-blok summary::-webkit-details-marker{display:none}
+.vraag-blok h3{margin:0;font-size:16px;line-height:1.4;letter-spacing:.02em;
   font-weight:500;color:var(--chalk);text-transform:none}
-.vraag-blok p{margin:0;color:var(--silver)}
+.vraag-blok summary::after{
+  content:"";flex:0 0 auto;width:11px;height:11px;
+  background:linear-gradient(var(--slate),var(--slate)) center/11px 1px no-repeat,
+             linear-gradient(var(--slate),var(--slate)) center/1px 11px no-repeat;
+}
+.vraag-blok[open] summary::after{background-size:11px 1px, 1px 0}
+.vraag-blok summary:hover::after,.vraag-blok summary:focus-visible::after{
+  background-image:linear-gradient(var(--chalk),var(--chalk)),
+                   linear-gradient(var(--chalk),var(--chalk))}
+@media (prefers-reduced-motion:no-preference){
+  .vraag-blok summary::after{transition:background-size .22s ease}
+}
+.vraag-blok p{margin:0;padding-bottom:22px;color:var(--silver);max-width:56ch}
 
 /* ---------- 21. Het formulier, duidelijker ----------
    Het was een rij velden op een donkere grond, en je zag nauwelijks waar een
@@ -914,3 +1065,91 @@ main > section:last-child{padding-bottom:var(--sectie)}
 @media (max-width:767px){
   .voet-vragen{display:none}
 }
+
+/* ---- 21. De werkfilm: een eigen band onder de vijf stappen ------------------
+   PLAATS. Naast de vijf stappen paste de film op zijn breedst 320px, want de
+   bron is 684 breed en meer is opblazen. Dat is een duimnagel naast een
+   tekstkolom van 620, en de film is het enige bewegende bewijs van vakwerk op
+   de site. Als eigen band eronder staat hij op ware grootte naast een
+   tekstkolom die van hem is: de vijf stappen in woorden, en daarna dezelfde
+   vijf stappen in elf seconden.
+
+   GROND. --ink-800 is volgens §3 precies waarvoor het bedoeld is: een sectie
+   die zich van de grond losmaakt zonder lijn. De band loopt tot de vensterrand
+   door, de inhoud erin blijft binnen de 1440 van §5.
+
+   KLEUR. De film begint in kleur en zakt over elf seconden naar zwart-wit —
+   dezelfde ontkleuring als de hero in §18, geen nieuw effect. Je ziet dus
+   eerst dat het een zomerjurk is, en daarna hoort het beeld bij de site. De
+   animatie hangt aan `klaar` (gezet in site.js zodra de film kan doorspelen,
+   en die begint pas te laden als hij in beeld komt), niet aan het laden van de
+   pagina — anders is de ontkleuring al voorbij voordat iemand hier is.
+
+   Het posterbeeld staat meteen op zwart-wit: dat is de eindstand. Wie beweging
+   heeft uitgezet houdt dat beeld, en er valt geen gat, want de film lag er
+   alleen bovenop. */
+.filmband{background:var(--ink-800)}
+.filmband .binnen{
+  padding-block:var(--sectie);
+  display:grid;grid-template-columns:1fr;gap:40px;align-items:start;
+}
+@media (min-width:1000px){
+  /* De film links op ware grootte, de tekst ernaast, en lucht ertussen. */
+  /* De tekst staat op de ONDERRAND van de film, niet op de bovenrand. Boven
+     uitgelijnd bleef er onder de tekst een gat van bijna driehonderd pixels
+     staan, want de film is 478 hoog en de tekst 180. Onder uitgelijnd delen de
+     twee kolommen een rand, staat de lucht bovenin waar hij niets stukmaakt, en
+     is het dezelfde afspraak als de hero: tekst linksonder in het beeldvlak. */
+  .filmband .binnen{grid-template-columns:320px minmax(0,620px);
+                    column-gap:calc(var(--goot) * 3);row-gap:0;align-items:end}
+}
+.werkfilm{margin:0}
+@media (min-width:1000px){ .werkfilm{max-width:320px} }
+.werkfilm .doek{position:relative;aspect-ratio:684/1022;background:var(--ink-700)}
+.werkfilm img,.werkfilm video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* GEMETEN, 25 augustus 2026, en toen pas goed. De ontkleuring wérkte al — op
+   1440 en op 390 gelijk — maar twee dingen eromheen waren fout, en samen
+   verklaren ze precies waarom de film op een telefoonafdruk vol in kleur staat.
+
+   FOUT 1: HET POSTERBEELD STOND OP GRIJS. De volgorde was dus grijs, dan
+   kleur, dan grijs. Dat is niet "begint in kleur"; dat is een grijze flits
+   vooraf die de hele opzet tegenspreekt. Het posterbeeld staat nu in kleur, met
+   exact hetzelfde filter als het eerste frame van de film, zodat je bij het
+   overvloeien geen sprong ziet. Wie beweging heeft uitgezet krijgt hem alsnog
+   grijs — daar speelt niets, dus daar is de eindstand het enige juiste beeld,
+   en een blijvend kleurbeeld zou het luidste object van de site zijn.
+
+   FOUT 2: DE CURVE WAS GELEEND VAN DE HERO EN PASTE NIET. Gemeten op de oude
+   instelling: na 4 seconden 4% grijs, na 7 seconden 15%, en pas tussen 8 en 11
+   ging het echte werk gebeuren. Op de hero is dat juist goed en met opzet zo
+   (§18: de eerste acht seconden gebeurt er bijna niets). Hier niet, om twee
+   redenen. De film duurt 11,7 seconden en draait in een lus, dus de omslag valt
+   samen met het einde van de eerste ronde: wie er vijf seconden naar kijkt en
+   doorscrollt ziet alleen kleur en nooit de overgang. En op de hero is de
+   ontkleuring versiering, hier draagt hij het argument — het is een zomerjurk,
+   en dan hoort hij bij de site. Een argument dat niemand ziet gebeuren doet
+   niets.
+
+   Daarom een eigen curve: twee seconden vol kleur zodat je ziet dát het roze
+   is, dan negen seconden waarin de kleur zichtbaar wegtrekt door de middentonen
+   in plaats van in de laatste twee seconden. Grijs voor het einde van de eerste
+   ronde, en grijs in elke ronde daarna. */
+.werkfilm img{filter:grayscale(0) contrast(1.02) saturate(1.06)}
+.werkfilm video{opacity:0;transition:opacity .8s ease;
+  filter:grayscale(0) contrast(1.02) saturate(1.06)}
+.werkfilm video.klaar{opacity:1;animation:ontkleuren-film 9s ease-in-out 2s forwards}
+@keyframes ontkleuren-film{
+  0%   {filter:grayscale(0)   contrast(1.02) saturate(1.06)}
+  30%  {filter:grayscale(.22) contrast(1.03) saturate(1.00)}
+  65%  {filter:grayscale(.62) contrast(1.04) brightness(.97)}
+  100% {filter:grayscale(1)   contrast(1.06) brightness(.94)}
+}
+@media (prefers-reduced-motion:reduce){
+  .werkfilm video{display:none}
+  .werkfilm img{filter:grayscale(1) contrast(1.06) brightness(.94)}
+}
+.filmtekst .label{margin:0 0 12px}
+.filmtekst h3{margin:0 0 var(--kop-tekst);font-size:17px;line-height:1.30;
+  letter-spacing:.10em;text-transform:uppercase;font-weight:400;color:var(--chalk)}
+.filmtekst p{color:var(--silver)}
+.filmtekst p:last-child{margin-bottom:0}
