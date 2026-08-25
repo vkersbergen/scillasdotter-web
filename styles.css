@@ -1095,13 +1095,15 @@ main > section:last-child{padding-bottom:var(--sectie)}
 }
 @media (min-width:1000px){
   /* De film links op ware grootte, de tekst ernaast, en lucht ertussen. */
-  /* De tekst staat op de ONDERRAND van de film, niet op de bovenrand. Boven
-     uitgelijnd bleef er onder de tekst een gat van bijna driehonderd pixels
-     staan, want de film is 478 hoog en de tekst 180. Onder uitgelijnd delen de
-     twee kolommen een rand, staat de lucht bovenin waar hij niets stukmaakt, en
-     is het dezelfde afspraak als de hero: tekst linksonder in het beeldvlak. */
+  /* De tekst deelt de BOVENRAND met de film. Hij stond eerst onderaan; op de
+     echte site las dat als een gat boven de tekst in plaats van als rust, en de
+     opdrachtgever wees er meteen op. Boven uitgelijnd delen de twee kolommen
+     een echte rand — de bovenkant van het beeld en de eerste regel tekst — en
+     dat is de enige uitlijning die er hier te maken valt. Gecentreerd zou
+     nergens op uitkomen. Wat er onder de tekst overblijft loopt door in de
+     ruimte van de sectie erna en valt daardoor niet als gat op. */
   .filmband .binnen{grid-template-columns:320px minmax(0,620px);
-                    column-gap:calc(var(--goot) * 3);row-gap:0;align-items:end}
+                    column-gap:calc(var(--goot) * 3);row-gap:0;align-items:start}
 }
 .werkfilm{margin:0}
 @media (min-width:1000px){ .werkfilm{max-width:320px} }
@@ -1148,6 +1150,21 @@ main > section:last-child{padding-bottom:var(--sectie)}
   .werkfilm video{display:none}
   .werkfilm img{filter:grayscale(1) contrast(1.06) brightness(.94)}
 }
+/* DE SLOTBAND. De procespagina eindigde op drie losse tekstsecties op de gewone
+   grond: eerst de doorlooptijd en de prijs, dan de slotregel met de knop, en
+   daaronder nog de vragen. De film in het midden was daardoor het zwaarste
+   element van de pagina en alles erna zakte weg — precies wat de opdrachtgever
+   "gek" noemde.
+
+   Nu heeft de pagina twee banden en een ruggengraat: de vijf stappen in
+   woorden, de band met de film als bewijs, en aan het eind de band met de
+   vraag. Dezelfde grond als de filmband, want het is hetzelfde soort onderbreking;
+   alleen één tekstkolom in plaats van beeld naast tekst. De vragen zijn
+   vertrokken naar Enquire, dus de band is nu ook echt het slot. */
+.slotband .binnen{grid-template-columns:minmax(0,620px)}
+@media (min-width:1000px){ .slotband .binnen{grid-template-columns:minmax(0,620px)} }
+.slotband .afspraak{margin-top:var(--stap)}
+
 .filmtekst .label{margin:0 0 12px}
 .filmtekst h3{margin:0 0 var(--kop-tekst);font-size:17px;line-height:1.30;
   letter-spacing:.10em;text-transform:uppercase;font-weight:400;color:var(--chalk)}
