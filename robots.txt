@@ -1,0 +1,5 @@
+# poort — zolang het gordijn hangt: niets indexeren.
+# De echte robots.txt (die build.py schrijft) staat in poort/robots-origineel.txt
+# en komt terug met `python3 poort.py --weg`.
+User-agent: *
+Disallow: /
