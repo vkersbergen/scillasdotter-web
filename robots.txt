@@ -1,5 +1,15 @@
-# poort — zolang het gordijn hangt: niets indexeren.
-# De echte robots.txt (die build.py schrijft) staat in poort/robots-origineel.txt
-# en komt terug met `python3 poort.py --weg`.
 User-agent: *
-Disallow: /
+Allow: /
+
+# De antwoordmachines mogen lezen; daar komt straks verkeer vandaan.
+User-agent: GPTBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://www.scillasdotter.com/sitemap.xml
+# Wat deze site is, in het kort: https://www.scillasdotter.com/llms.txt
